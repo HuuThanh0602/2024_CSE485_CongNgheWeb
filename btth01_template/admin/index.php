@@ -41,6 +41,57 @@
             </div>
         </nav>
 
+
+<?php
+
+use LDAP\Result;
+
+include '../databsae/db.php';
+//hàm tính tổng số lượng người dùng
+function getUser() {
+    global $pdo;
+    $stmt = $pdo->query("SELECT COUNT(*) as totalUser FROM users");
+    $result = $stmt->fetch();
+    return $result['totalUser'];
+};
+// Gọi hàm tính tổng số lượng người dùng
+$totalUser = getUser();
+
+
+//hàm tính tổng thể loại
+function getCategory(){
+    global $pdo;
+    $stmt = $pdo->query("SELECT COUNT(*) AS totalCategory FROM theloai");
+    $result = $stmt->fetch();
+    return $result['totalCategory'];
+};
+//gọi hàm tính tổng thể loại
+$totalCategory = getCategory();
+
+
+//Hàm tính tổng tác giả
+function getAuthor(){
+    global $pdo;
+    $stmt = $pdo->query("SELECT COUNT(*) AS totalAuthor FROM tacgia");
+    $result =$stmt->fetch();
+    return $result['totalAuthor'];
+};
+
+//gọi hàm tính tổng tác giả
+$totalAuthor = getAuthor();
+
+
+//Hàm tính tổng bà viết
+function getArticle(){
+    global $pdo;
+    $stmt = $pdo->query("SELECT COUNT(*) AS totalArticle FROM baiviet");
+    $result =$stmt->fetch();
+    return $result['totalArticle'];
+};
+
+//gọi hàm tính tổng bài viết
+$totalArticle = getArticle();
+?>
     </header>
     <main class="container mt-5 mb-5">
         <!-- <h3 class="text-center text-uppercase mb-3 text-primary">CẢM NHẬN VỀ BÀI HÁT</h3> -->
@@ -51,9 +102,10 @@
                         <h5 class="card-title text-center">
                             <a href="" class="text-decoration-none">Người dùng</a>
                         </h5>
-
                         <h5 class="h1 text-center">
-                            110
+                            <?php
+                            echo $totalUser
+                             ?>
                         </h5>
                     </div>
                 </div>
@@ -67,7 +119,9 @@
                         </h5>
 
                         <h5 class="h1 text-center">
-                            10
+                            <?php 
+                            echo $totalCategory;
+                            ?>
                         </h5>
                     </div>
                 </div>
@@ -81,7 +135,9 @@
                         </h5>
 
                         <h5 class="h1 text-center">
-                            20
+                            <?php
+                            echo $totalAuthor;
+                            ?>
                         </h5>
                     </div>
                 </div>
@@ -95,7 +151,10 @@
                         </h5>
 
                         <h5 class="h1 text-center">
-                            110
+                        <?php
+                            echo $totalArticle;
+                            ?>
+                             
                         </h5>
                     </div>
                 </div>

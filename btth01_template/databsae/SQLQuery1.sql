@@ -1,51 +1,60 @@
 ﻿CREATE DATABASE BTTH01_CSE485;
+
 USE BTTH01_CSE485;
 
 CREATE TABLE tacgia(
-    ma_tgia INT NOT NULL PRIMARY KEY,
-    ten_tgia VARCHAR(100) NOT NULL,
-    hinh_tgia VARCHAR(100)
+	ma_tgia int  not null primary key,
+	ten_tgia varchar(100) not null ,
+	hinh_tgia varchar(100)
 );
 
-CREATE TABLE theloai(
-    ma_tloai INT NOT NULL PRIMARY KEY,
-    ten_tloai VARCHAR(50) NOT NULL
+create Table theloai(
+	ma_tloai int not null primary key ,
+	ten_tloai varchar(50) not null
 );
 
-CREATE TABLE baiviet(
-    ma_bviet INT NOT NULL PRIMARY KEY,
-    tieude VARCHAR(200) NOT NULL,
-    tenbhat VARCHAR(100) NOT NULL,
-    ma_tloai INT NOT NULL,
-    tomtat TEXT NOT NULL,
-    noidung TEXT,
-    ma_tgia INT NOT NULL,
-    ngayviet DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
-    hinhthanh VARCHAR(200),
-    FOREIGN KEY (ma_tloai) REFERENCES theloai(ma_tloai),
+create table baiviet(
+	ma_bviet int not null primary key,
+	tieude varchar(200) not null,
+	tenbhat varchar(100) not null,
+	ma_tloai int not null,
+	tomtat text not null,
+	noidung text,
+	ma_tgia int not null,
+	ngayviet datetime default current_timestamp not null,
+	hinhthanh varchar(200),
+	FOREIGN KEY (ma_tloai) REFERENCES theloai(ma_tloai),
     FOREIGN KEY (ma_tgia) REFERENCES tacgia(ma_tgia)
 );
+CREATE TABLE Users(
+	users VARCHAR(50)  PRIMARY KEY NOT NULL,
+	passwords VARCHAR (50),
+	user_Permissions VARCHAR(50)
+	);
+INSERT INTO Users VALUES ('admin','admin','admin');
+INSERT INTO Users VALUES ('client','1','client');
+
 -- Chèn dữ liệu vào bảng theloai
-INSERT INTO theloai (ma_tloai, ten_tloai) VALUES
-(1, 'Nhạc trẻ'),
-(2, 'Nhạc trữ tình'),
-(3, 'Nhạc cách mạng'),
-(4, 'Nhạc thiếu nhi'),
-(5, 'Nhạc quê hương'),
-(6, 'POP'),
-(7, 'Rock'),
-(8, 'R&B');
+INSERT INTO theloai VALUES (1, 'Nhạc trẻ');
+INSERT INTO theloai VALUES (2, 'Nhạc trữ tình');
+INSERT INTO theloai VALUES (3, 'Nhạc cách mạng');
+INSERT INTO theloai VALUES (4, 'Nhạc thiếu nhi');
+INSERT INTO theloai VALUES (5, 'Nhạc quê hương');
+INSERT INTO theloai VALUES (6, 'POP');
+INSERT INTO theloai VALUES (7, 'Rock');
+INSERT INTO theloai VALUES (8, 'R&B');
+
 
 -- Chèn dữ liệu vào bảng tacgia (đảm bảo rằng không có bản ghi trùng lặp)
-INSERT INTO tacgia (ma_tgia, ten_tgia) VALUES
-(1, 'Tác Giả 1'),
-(2, 'Tác Giả 2'),
-(3, 'Tác Giả 3'),
-(4, 'Tác Giả 4'),
-(5, 'Tác Giả 5'),
-(6, 'Tác Giả 6'),
-(7, 'Tác Giả 7'),
-(8, 'Tác Giả 8');
+INSERT INTO tacgia (ma_tgia, ten_tgia) VALUES (1, 'Nhacvietplus');
+INSERT INTO tacgia (ma_tgia, ten_tgia) VALUES (2, 'Sưu tầm');
+INSERT INTO tacgia (ma_tgia, ten_tgia) VALUES (3, 'Sandy');
+INSERT INTO tacgia (ma_tgia, ten_tgia) VALUES (4, 'Lê Trung Ngân');
+INSERT INTO tacgia (ma_tgia, ten_tgia) VALUES (5, 'Khánh Ngọc');
+INSERT INTO tacgia (ma_tgia, ten_tgia) VALUES (6, 'Night Stalker');
+INSERT INTO tacgia (ma_tgia, ten_tgia) VALUES (7, 'Phạm Phương Anh');
+INSERT INTO tacgia (ma_tgia, ten_tgia) VALUES (8, 'Tâm tình');
+
 
 -- Chèn dữ liệu vào bảng baiviet (đảm bảo rằng không có bản ghi trùng lặp và tất cả các khóa ngoại đều hợp lệ)
 INSERT INTO baiviet (ma_bviet, tieude, tenbhat, ma_tloai, tomtat, ma_tgia, ngayviet) VALUES
@@ -59,6 +68,43 @@ INSERT INTO baiviet (ma_bviet, tieude, tenbhat, ma_tloai, tomtat, ma_tgia, ngayv
 (8, 'Nơi tình yêu bắt đầu', 'Nơi tình yêu bắt đầu', 1, 'Nhiều người sẽ nghĩ làm gì có yêu nhất và làm gì có yêu mãi. Ừ! Chẳng có gì là mãi mãi cả, vì chúng ta không trường tồn vĩnh cửu', 1, '2014-02-03'),
 (9, 'Love Me Like There’s No Tomorrow', 'Love Me Like There’s No Tomorrow', 8, 'Nếu ai đã từng yêu Queen, yêu cái chất giọng cao, sắc sảo như một vết cắt thật ngọt ẩn giấu bao cảm xúc mãnh liệt của Freddie chắc không thể không "điêu đứng" mỗi khi nghe Love Me Like There’s No Tomorrow.', 1, '2013-02-26'),
 (10, 'Stronger', 'Stronger', 7, 'Em không phải là người giỏi giấu cảm xúc, nhưng em lại là người giỏi đoán biết cảm xúc của người khác vậy nên đừng cố nói nhớ em, rằng mọi thứ chỉ là do hoàn cảnh. Và cũng đừng dối em rằng anh đã từng yêu em. Em nhắm mắt cũng cảm nhận được mà, thật đấy', 2, '2013-08-21'),
-(11, 'Ôi Cuộc Sống Mến Thương', 'Ôi Cuộc Sống Mến Thương', 5, 'Có một câu nói như thế này "Âm nhạc là một cái gì khác lạ mà hầu như tôi muốn nói nó là một phép thần diệu.Vì nó đứng giữa tư tưởng và hiện tượng, tinh thần và vật chất, mọi thứ trung gian mơ hồ thế đó mà không là thế đó giữa các sự vật mà âm nhạc hòa giải"', 2, '2011-10-09'),
-(12, 'Cây và gió', 'Cây và gió', 7, 'Em và anh, hai đứa quen nhau thật tình cờ. Lời hát của anh từ bài hát “Cây và gió” đã làm tâm hồn em xao động. Nhưng sự thật phũ phàng rằng em chưa bao giờ nói cho anh biết những suy nghĩ tận sâu trong tim mình. Bởi vì em nhút nhát, em không dám đối mặt với thực tế khắc nghiệt, hay thực ra em không dám đối diện với chính mình.', 7, '2013-12-05'),
-(13, 'Như một cách tạ ơn đời', 'Người thầy', 2, 'Ánh nắng cuối ngày rồi cũng sẽ tắt, dòng sông con đò rồi cũng sẽ rẽ sang một hướng khác. Nhưng việc trồng người luôn cảm thụ với chuyến đò ngang, cứ tần tảo đưa rồi lặng lẽ quay về đưa sang. Con đò năm xưa của Thầy nặng trĩu yêu thương, hy sinh thầm lặng.', 8, '2014-01-02');
+(11, 'Ôi Cuộc Sống Mến Thương', 'Ôi Cuộc Sống Mến Thương', 5, 'Có một câu nói như thế này "Âm nhạc là một cái gì khác lạ mà hầu như tôi muốn nói nó là một phép thần diệu.Vì nó đứng giữa tư tưởng và hiện tượng, tinh thần và vật chất, mọi thứ trung gian mơ hồ thế đó mà không là thế đó giữa các sự vật mà âm nhạc hòa giải"', 2, '2011-10-09');
+
+
+
+
+-- truy vấn dữ liệu --
+SELECT b.ma_bviet, b.tieude, b.tenbhat
+FROM baiviet b
+JOIN theloai t ON b.ma_tloai = t.ma_tloai
+WHERE t.ten_tloai = 'Nhạc trữ tình';
+
+SELECT b.ma_bviet, b.tieude, b.tenbhat
+FROM baiviet b
+JOIN tacgia tg ON b.ma_tgia = tg.ma_tgia
+WHERE tg.ten_tgia = 'Nhacvietplus';
+
+
+SELECT t.ma_tloai, t.ten_tloai
+FROM theloai t
+LEFT JOIN baiviet b ON t.ma_tloai = b.ma_tloai
+WHERE b.ma_bviet IS NULL;
+
+SELECT b.ma_bviet, b.tieude, b.tenbhat, tg.ten_tgia, t.ten_tloai, b.ngayviet
+FROM baiviet b
+JOIN tacgia tg ON b.ma_tgia = tg.ma_tgia
+JOIN theloai t ON b.ma_tloai = t.ma_tloai;
+
+
+SELECT t.ten_tloai, COUNT(b.ma_bviet) AS so_bai_viet
+FROM theloai t
+JOIN baiviet b ON t.ma_tloai = b.ma_tloai
+GROUP BY t.ten_tloai
+HAVING COUNT(b.ma_bviet) = (
+    SELECT MAX(bai_viet_count)
+    FROM (
+        SELECT COUNT(ma_bviet) AS bai_viet_count
+        FROM baiviet
+        GROUP BY ma_tloai
+    ) AS subquery
+);
