@@ -31,10 +31,10 @@
                         <a class="nav-link " href="category.php">Thể loại</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="author.php">Tác giả</a>
+                        <a class="nav-link active fw-bold" href="author.php">Tác giả</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active fw-bold" href="article.php">Bài viết</a>
+                        <a class="nav-link" href="article.php">Bài viết</a>
                     </li>
                 </ul>
                 </div>
@@ -42,44 +42,28 @@
         </nav>
 
     </header>
-<?php 
-include '../databsae/db.php';
-$sql = "SELECT hinhthanh, tenbhat, ma_bviet FROM baiviet";
-$stmt = $pdo->prepare($sql);
-$stmt->execute();
-
-// Lấy toàn bộ dữ liệu
-$songs = $stmt->fetchAll(PDO::FETCH_ASSOC);
-?>
-    <main class="container-fluid mt-3">
-    <a href="add_article.php" class="btn btn-success">Thêm mới</a>
-        <h3 class="text-center text-uppercase mb-3 text-primary"></h3>
+    <main class="container mt-5 mb-5">
+        <!-- <h3 class="text-center text-uppercase mb-3 text-primary">CẢM NHẬN VỀ BÀI HÁT</h3> -->
         <div class="row">
-        <?php foreach ($songs as $song): ?>
-    <?php
-    // Gán dữ liệu từ cơ sở dữ liệu vào các biến
-    $tieude = htmlspecialchars($song['tenbhat']);
-    $hinhanh = htmlspecialchars($song['hinhthanh']);
-    $duongdan = urlencode($song['ma_bviet']);
-    ?>
-    <div class="col-sm-3">
-        <div class="card mb-2" style="width: 100%;">
-            <img src="../images/songs/<?php echo $hinhanh; ?>.jpg" class="card-img-top" alt="<?php echo $tieude; ?>">
-            <div class="card-body">
-                <h5 class="card-title text-center">
-                    <a href="edit_article.php?song_id=<?php echo $duongdan; ?>" class="text-decoration-none"><?php echo $tieude; ?></a>
-                </h5>
-                <!-- Thêm các nút Sửa và Xóa -->
-                <div class="d-flex justify-content-center">
-                    <a href="edit_article.php?song_id=<?php echo $duongdan; ?>" class="btn btn-primary btn-sm me-2">Sửa</a>
-                    <a href="delete_article.php?song_id=<?php echo $duongdan; ?>" class="btn btn-danger btn-sm" onclick="return confirm('Bạn có chắc chắn muốn xóa bài viết này không?');">Xóa</a>
-                </div>
-            </div>
-        </div>
-    </div>
-<?php endforeach; ?>
+            <div class="col-sm">
+                <h3 class="text-center text-uppercase fw-bold">Sửa thông tin Tác Giả</h3>
+                <form action="process_add_category.php" method="post">
+                <div class="input-group mt-3 mb-3">
+                        <span class="input-group-text" id="lblCatId">Mã thể loại</span>
+                        <input type="text" class="form-control" name="txtCatId" readonly value="1">
+                    </div>
 
-        </div>       
+                    <div class="input-group mt-3 mb-3">
+                        <span class="input-group-text" id="lblCatName">Tên thể loại</span>
+                        <input type="text" class="form-control" name="txtCatName" value = "Nhạc trữ tình">
+                    </div>
+
+                    <div class="form-group  float-end ">
+                        <input type="submit" value="Lưu lại" class="btn btn-success">
+                        <a href="author.php" class="btn btn-warning ">Quay lại</a>
+                    </div>
+                </form>
+            </div>
         </div>
     </main>
     <footer class="bg-white d-flex justify-content-center align-items-center border-top border-secondary  border-2" style="height:80px">

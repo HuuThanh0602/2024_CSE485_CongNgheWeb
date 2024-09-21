@@ -42,6 +42,7 @@
 include 'databsae/db.php'
 ?>
 <?php 
+session_start();
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $input_username = $_POST['username'];
     $input_password = $_POST['password'];
