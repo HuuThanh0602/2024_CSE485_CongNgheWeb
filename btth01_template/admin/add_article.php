@@ -40,6 +40,41 @@
                 </div>
             </div>
         </nav>
+<?php
+include '../databsae/db.php';
+     // Dữ liệu cần thêm từ form (POST method)
+     if ($_SERVER["REQUEST_METHOD"] == "POST") {
+     $title = $_POST['txtTitleName'];
+     $article = $_POST['txtArticleName'];
+     $summary = $_POST['txtSummaryName'];
+     $content = $_POST['txtContent'];  // Nếu có trường nội dung trong form
+     $date = $_POST['txtDayName'];
+   
+ 
+     // Chuẩn bị câu lệnh SQL với prepared statement
+     $sql = "INSERT INTO baiviet (tieude, tenbhat, tomtat, noidung, ngaviet) 
+             VALUES (:title, :article, :summary, :content, :date)";
+ 
+     // Chuẩn bị câu lệnh PDO
+     $stmt = $conn->prepare($sql);
+ 
+     // Gán giá trị cho các placeholder
+     $stmt->bindParam(':title', $title);
+     $stmt->bindParam(':article', $article);
+     $stmt->bindParam(':summary', $summary);
+     $stmt->bindParam(':content', $content);
+     $stmt->bindParam(':date', $date);
+ 
+     // Chuyển hướng với trạng thái thành công
+     header("Location: article.php?status=success");
+     exit(); // Dừng thực thi PHP sau khi chuyển hướng
+     
+     // Thực thi câu lệnh SQL
+     $stmt->execute();
+ 
+     echo "Bài viết đã được thêm thành công!"; }
+?>
+
 
     </header>
     <main class="container mt-5 mb-5">
@@ -48,6 +83,12 @@
             <div class="col-sm">
                 <h3 class="text-center text-uppercase fw-bold">Thêm mới bài viết</h3>
                 <form action="process_add_article.php" method="post">
+
+                    <div class="input-group mt-3 mb-3">
+                        <span class="input-group-text" id="lblTitleName">Mã bài viết </span>
+                        <input type="text" class="form-control" name="txtTitleName" >
+                    </div>
+
                     <div class="input-group mt-3 mb-3">
                         <span class="input-group-text" id="lblTitleName">Tên tiêu đề </span>
                         <input type="text" class="form-control" name="txtTitleName" >
@@ -61,6 +102,11 @@
                     <div class="input-group mt-3 mb-3">
                         <span class="input-group-text" id="lblSummaryName"> Tóm tắt </span>
                         <input type="text" class="form-control" name="txtSummaryName" >
+                    </div>
+
+                    <div class="input-group mt-3 mb-3">
+                        <span class="input-group-text" id="lblSummaryName"> Nội dung </span>
+                        <input type="text" class="form-control" name="txtContentName" >
                     </div>
 
                     <div class="input-group mt-3 mb-3">

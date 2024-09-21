@@ -15,7 +15,7 @@ $options = [
 
 try {
     $pdo = new PDO($dsn, $user, $pass, $options);
-    echo "<script>alert('Kết nối thành công');</script>";
+    //echo "<script>alert('Kết nối thành công');</script>";
     
 } catch (\PDOException $e) {
     throw new \PDOException($e->getMessage(), (int)$e->getCode());
