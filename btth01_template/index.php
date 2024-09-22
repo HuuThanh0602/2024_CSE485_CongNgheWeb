@@ -65,7 +65,7 @@
             </div>
     </header>
 <?php 
-include './databsae/db.php';
+include './database/db.php';
 $sql = "SELECT hinhthanh, tenbhat, ma_bviet FROM baiviet";
 $stmt = $pdo->prepare($sql);
 $stmt->execute();

@@ -41,7 +41,7 @@
             </div>
         </nav>
 <?php
-include '../databsae/db.php';
+include '../database/db.php';
     $article_id = isset($_GET['ma_bviet']) ? intval($_GET['ma_bviet']) : 0;
     global $pdo;
     //lấy dữ liệu tác giả

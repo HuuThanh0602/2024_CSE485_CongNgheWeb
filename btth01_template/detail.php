@@ -40,7 +40,7 @@
 
 <?php 
 
-include './databsae/db.php';
+include './database/db.php';
     $contentId = isset($_GET['song_id']) ? intval($_GET['song_id']) : 0;
     global $pdo;
     $sql = "SELECT 

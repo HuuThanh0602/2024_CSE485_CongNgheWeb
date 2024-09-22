@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -41,7 +42,7 @@
             </div>
         </nav>
 <?php
-include '../databsae/db.php';
+include '../database/db.php';
      // Dữ liệu cần thêm từ form (POST method)
      global $pdo;
 
@@ -68,7 +69,7 @@ include '../databsae/db.php';
      $category_id = $_POST['category_id'];
      $txtImage_id = $_POST['txtImage_id'];
 
-     $sql_count = "SELECT COUNT(*) as total FROM baiviet";
+     $sql_count = "SELECT MAX(ma_bviet) as total FROM baiviet";
      $stmt_count = $pdo->prepare($sql_count);
      $stmt_count->execute();
      $result = $stmt_count->fetch(PDO::FETCH_ASSOC);
@@ -98,6 +99,9 @@ include '../databsae/db.php';
      
      // Thực thi câu lệnh SQL
      if($stmt->execute()){
+        echo "<script>
+                    alert('Thêm thành công!');
+            </script>";
        
      header("Location: article.php?status=success");
      exit();

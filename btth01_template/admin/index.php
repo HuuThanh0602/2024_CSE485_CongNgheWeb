@@ -46,7 +46,7 @@
 
 use LDAP\Result;
 
-include '../databsae/db.php';
+include '../database/db.php';
 //hàm tính tổng số lượng người dùng
 function getUser() {
     global $pdo;

@@ -39,7 +39,7 @@
         </nav>
 
 <?php
-include 'databsae/db.php'
+include 'database/db.php'
 ?>
 <?php 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
