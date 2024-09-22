@@ -68,7 +68,7 @@ include '../databsae/db.php';
      $category_id = $_POST['category_id'];
      $txtImage_id = $_POST['txtImage_id'];
 
-     $sql_count = "SELECT COUNT(*) as total FROM baiviet";
+     $sql_count = "SELECT MAX(ma_bviet) as total FROM baiviet";
      $stmt_count = $pdo->prepare($sql_count);
      $stmt_count->execute();
      $result = $stmt_count->fetch(PDO::FETCH_ASSOC);

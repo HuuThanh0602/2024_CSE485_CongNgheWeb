@@ -153,8 +153,7 @@ $totalArticle = getArticle();
                         <h5 class="h1 text-center">
                         <?php
                             echo $totalArticle;
-                            ?>
-                             
+                            ?>                            
                         </h5>
                     </div>
                 </div>
