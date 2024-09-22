@@ -76,7 +76,7 @@
                                 </td>";
                             // Thêm biểu tượng xóa với link
                             echo "<td>
-                                    <a href='erase_author.php?id=" . $row['ma_tgia'] . "' class='text-danger'><i class='fa-solid fa-trash'></i></a>
+                                    <a href='erase_author.php?id=" . $row['ma_tgia'] . "' class='text-danger' onclick = 'return confirm(\"Bạn có chắc chắn muốn xóa tác giả này không?\")'><i class='fa-solid fa-trash'></i></a>
                                 </td>";
                             echo "</tr>";
                         }
