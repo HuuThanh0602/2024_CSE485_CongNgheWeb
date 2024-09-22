@@ -111,5 +111,47 @@ HAVING COUNT(b.ma_bviet) = (
     ) AS subquery
 );
 
+SELECT TOP 2 tg.ma_tgia, tg.ten_tgia, COUNT(b.ma_bviet) AS SoBaiViet
+FROM tacgia tg
+JOIN baiviet b ON tg.ma_tgia = b.ma_tgia
+GROUP BY tg.ma_tgia, tg.ten_tgia
+ORDER BY SoBaiViet DESC;
 
 
+SELECT ma_bviet, tieude, tenbhat
+FROM baiviet
+WHERE tenbhat LIKE '%yêu%' 
+   OR tenbhat LIKE '%thương%' 
+   OR tenbhat LIKE '%anh%' 
+   OR tenbhat LIKE '%em%';
+
+SELECT ma_bviet, tieude, tenbhat
+FROM baiviet
+WHERE tieude LIKE '%yêu%' 
+   OR tieude LIKE '%thương%' 
+   OR tieude LIKE '%anh%' 
+   OR tieude LIKE '%em%'
+   OR tenbhat LIKE '%yêu%' 
+   OR tenbhat LIKE '%thương%' 
+   OR tenbhat LIKE '%anh%' 
+   OR tenbhat LIKE '%em%';
+
+
+CREATE VIEW vw_Music AS
+SELECT 
+    b.ma_bviet, 
+    b.tieude, 
+    b.tenbhat, 
+    t.ten_tloai, 
+    tg.ten_tgia
+FROM 
+    baiviet b
+JOIN 
+    theloai t ON b.ma_tloai = t.ma_tloai
+JOIN 
+    tacgia tg ON b.ma_tgia = tg.ma_tgia;
+
+select * from vw_Music
+
+ALTER TABLE theloai
+ADD SLBaiViet INT DEFAULT 0;

@@ -67,12 +67,13 @@ $songs = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <img src="../images/songs/<?php echo $hinhanh; ?>.jpg" class="card-img-top" alt="<?php echo $tieude; ?>">
             <div class="card-body">
                 <h5 class="card-title text-center">
-                    <a href="edit_article.php?song_id=<?php echo $duongdan; ?>" class="text-decoration-none"><?php echo $tieude; ?></a>
+                    <a href="edit_article.php?ma_bviet=<?php echo $duongdan; ?>" class="text-decoration-none"><?php echo $tieude; ?></a>
                 </h5>
                 <!-- Thêm các nút Sửa và Xóa -->
                 <div class="d-flex justify-content-center">
-                    <a href="edit_article.php?song_id=<?php echo $duongdan; ?>" class="btn btn-primary btn-sm me-2">Sửa</a>
-                    <a href="delete_article.php?song_id=<?php echo $duongdan; ?>" class="btn btn-danger btn-sm" onclick="return confirm('Bạn có chắc chắn muốn xóa bài viết này không?');">Xóa</a>
+                    <a href="edit_article.php?ma_bviet=<?php echo $duongdan; ?>" class="btn btn-primary btn-sm me-2">Sửa</a>
+                    
+                    <a href="delete_article.php?ma_bviet=<?php echo $duongdan; ?>" class="btn btn-danger btn-sm" onclick="return confirm('Bạn có chắc chắn muốn xóa bài viết này không?');">Xóa</a>
                 </div>
             </div>
         </div>
