@@ -11,7 +11,7 @@
 </head>
 <body>
 <?php
-include '../Database/db.php'; // Kết nối CSDL
+include '../database/db.php'; // Kết nối CSDL
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $ten_tgia = $_POST['ten_tgia'];
@@ -38,6 +38,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         if ($stmt->execute()) {
             // Chuyển hướng về trang category.php sau khi thêm thành công
+            echo "<script>
+                        alert('Thêm thành công!');
+                    </script>";
             header("Location: author.php?status=success");
             exit();
         } else {
@@ -94,12 +97,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <form action="add_author.php" method="post">
                     <div class="input-group mt-3 mb-3">
                         <span class="input-group-text" id="lblCatName">Tên Tác giả</span>
-                        <input type="text" class="form-control" required name="ten_tgia" >
-                    </div>
-
-                    <div class="input-group mt-3 mb-3">
-                        <span class="input-group-text" id="lblAutImg">Ảnh tác giả</span>
-                        <input type="file" class="form-control" name="fileAutImg" accept="image/*">
+                        <input type="text" class="form-control" name="ten_tgia" >
                     </div>
 
                     <div class="form-group  float-end ">

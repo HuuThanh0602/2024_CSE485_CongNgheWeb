@@ -43,8 +43,7 @@
 
     </header>
 <?php 
-include '../Database/db1.php';
-global $pdo;
+include '../database/db1.php';
 $sql = "SELECT hinhthanh, tenbhat, ma_bviet FROM baiviet";
 $stmt = $pdo->prepare($sql);
 $stmt->execute();

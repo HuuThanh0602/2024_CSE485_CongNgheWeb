@@ -1,10 +1,10 @@
 <?php
 $host = '127.0.0.1';
-$db   = 'btth01_cse485_ex';
+$db   = 'btth01_cse485';
 $user = 'root';  // Tên người dùng MySQL
 $pass = '';  // Mật khẩu MySQL
 $charset = 'utf8mb4';
-$port = '3306';//mặc định là 3306 còn đâu nó đổi thì mở xampp chỗ cột "Port" của MySql 
+$port = '3307';//mặc định là 3306 còn đâu nó đổi thì mở xampp chỗ cột "Port" của MySql 
 
 $dsn = "mysql:host=$host;port=$port;dbname=$db;charset=$charset";
 $options = [

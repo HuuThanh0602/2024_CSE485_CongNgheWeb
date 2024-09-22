@@ -17,15 +17,14 @@
 <body>
     <?php 
     // Kết nối với cơ sở dữ liệu
-    include '../Database/db.php';
+    include '../database/db.php';
 
     // Lấy ID thể loại từ URL
-    if (isset($_GET['id'])) {
-        $catId = $_GET['id'];
+    $catId = isset($_GET['id']) ? intval($_GET['id']) : 0;
         
 
         // Truy vấn thông tin thể loại dựa trên ID
-        $sql = "SELECT ten_tgia FROM tacgia WHERE ma_tgia = ?";
+        $sql = "SELECT ma_tgia, ten_tgia FROM tacgia WHERE ma_tgia = ?";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("i", $catId); // 'i' nghĩa là kiểu số nguyên
         $stmt->execute();
@@ -35,14 +34,32 @@
         if ($result->num_rows > 0) {
             // Lấy dữ liệu thể loại
             $row = $result->fetch_assoc();
-           
+            $catId = $row['ma_tgia'];
             $catName = $row['ten_tgia'];
-        } else {
-            echo "<div class='alert alert-danger text-center'>Không tìm thấy tác giả!</div>";
-            exit;
+        
+        }
+    
+
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $ten_tgia = $_POST['ten_tgia'];
+   
+   
+        $sql_update = "UPDATE tacgia SET ten_tgia = ? WHERE ma_tgia = ?";
+    
+        if ($stmt = $conn->prepare($sql_update)) {
+            // Gán giá trị cho tham số và thực hiện câu truy vấn
+            $stmt->bind_param("si", $ten_tgia, $catId);
+                if ($stmt->execute()) {
+                    // Sau khi thêm thành công, chuyển hướng về category.php
+                    header("Location: author.php?status=updated");
+                    exit();
+                } else {
+                    echo "Lỗi khi sửa tác giả: " . $stmt->error;
+                }
+                $stmt->close();
         }
     }
-    ?>
+?>
     <header>
         <nav class="navbar navbar-expand-lg bg-body-tertiary shadow p-3 bg-white rounded">
             <div class="container-fluid">
@@ -86,11 +103,11 @@
                 <h3 class="text-center text-uppercase fw-bold">Sửa thông tin tác giả</h3>
 
 
-                <form action="process_update_author.php?id=1" method="post">
+                <form action= "" method="post">
                     <input type="hidden" name="id" value="<?php echo $catId; ?>">
                     <div class="input-group mt-3 mb-3">
                         <span class="input-group-text" id="lblAutName">Tên tác giả</span>
-                        <input type="text" class="form-control" name="txtAutName" value="<?php echo $catName; ?>">
+                        <input type="text" class="form-control" name="ten_tgia" value="<?php echo $catName; ?>">
                     </div>
 
                     <div class="input-group mt-3 mb-3">

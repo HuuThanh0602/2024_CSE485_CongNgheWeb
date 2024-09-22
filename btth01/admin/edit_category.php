@@ -12,7 +12,7 @@
 <body>
 <?php
     // Kết nối với cơ sở dữ liệu
-    include '../Database/db.php';
+    include '../database/db.php';
 
     // Lấy ID thể loại từ URL
     $catId = isset($_GET['id']) ? intval($_GET['id']) : 0;

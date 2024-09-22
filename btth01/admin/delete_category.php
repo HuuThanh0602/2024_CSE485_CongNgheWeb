@@ -11,7 +11,7 @@
 <body>
 <?php
     // Kết nối với cơ sở dữ liệu
-    include '../Database/db.php';
+    include '../database/db.php';
 
     // Lấy ID thể loại từ URL
     if (isset($_GET['id'])) {

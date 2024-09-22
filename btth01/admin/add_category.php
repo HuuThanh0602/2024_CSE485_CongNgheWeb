@@ -41,7 +41,7 @@
             </div>
         </nav>
 <?php
-include '../Database/db.php'; // Kết nối CSDL
+include '../database/db.php'; // Kết nối CSDL
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $ten_tloai = $_POST['ten_tloai'];
@@ -68,7 +68,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         if ($stmt->execute()) {
             // Chuyển hướng về trang category.php sau khi thêm thành công
+            echo "<script>
+                    alert('Thêm thành công!');
+                </script>";
             header("Location: category.php?status=success");
+            
             exit();
         } else {
             echo "Lỗi khi thêm thể loại: " . $stmt->error;

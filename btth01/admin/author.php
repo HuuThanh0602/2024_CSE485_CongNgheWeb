@@ -57,15 +57,15 @@
                         </tr>
                     </thead>
                     <tbody>
-                    <?php
-                        include '../Database/db.php'; // Kết nối SQL
+                        <?php 
+                       include '../database/db.php'; //Kết nối SQL
 
-                        // Truy vấn lấy danh sách thể loại
-                        $sql = "SELECT ma_tgia, ten_tgia FROM tacgia";
-                        $result = $conn->query($sql);
+                       // Truy vấn lấy danh sách tác giả
+                       $sql = "SELECT ma_tgia, ten_tgia FROM tacgia";
+                       $result = $conn->query($sql);
 
-                        if ($result->num_rows > 0) {
-                        // Hiển thị thể loại
+                       if($result->num_rows > 0){
+                        // hiển thị danh sách tác giả
                         while($row = $result->fetch_assoc()) {
                             echo "<tr>";
                             echo "<td>" . $row['ma_tgia'] . "</td>";
@@ -76,19 +76,20 @@
                                 </td>";
                             // Thêm biểu tượng xóa với link
                             echo "<td>
-                                    <a href='delete_author.php?id=" . $row['ma_tgia'] . "' class='text-danger'><i class='fa-solid fa-trash'></i></a>
+                                    <a href='delete_author.php?id=" . $row['ma_tgia'] . "' class='text-danger' onclick = 'return confirm(\"Bạn có chắc chắn muốn xóa tác giả này không?\")'><i class='fa-solid fa-trash'></i></a>
                                 </td>";
                             echo "</tr>";
                         }
                         } else {
                         echo "Không có tác giả nào.";
-                        }
+                       }
                         ?>
+
                         <!-- <tr>
                             <th scope="row">1</th>
                             <td>Tác giả 2</td>
                             <td>
-                                <a href="edit_author.php?"><i class="fa-solid fa-pen-to-square"></i></a>
+                                <a href="edit_author.php"><i class="fa-solid fa-pen-to-square"></i></a>
                             </td>
                             <td>
                                 <a href=""><i class="fa-solid fa-trash"></i></a>

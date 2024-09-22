@@ -60,7 +60,7 @@
                     <tbody>
                         
                         <?php
-                        include '../Database/db.php'; // Kết nối SQL
+                        include '../database/db.php'; // Kết nối SQL
 
                         // Truy vấn lấy danh sách thể loại
                         $sql = "SELECT ma_tloai, ten_tloai FROM theloai";
