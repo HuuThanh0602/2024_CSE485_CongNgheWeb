@@ -1,5 +1,5 @@
 <?php
-include '../databsae/db.php';
+include '../Database/db1.php';
 
 // Kiểm tra xem ma_bviet có được gửi qua URL hay không
 if (isset($_GET['ma_bviet'])) {

@@ -41,7 +41,7 @@
             </div>
         </nav>
 <?php
-include '../databsae/db.php';
+include '../Database/db1.php';
      // Dữ liệu cần thêm từ form (POST method)
      global $pdo;
 

@@ -99,7 +99,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
                     <div class="form-group  float-end ">
                         <input type="submit" value="Thêm" class="btn btn-success">
-                        <a href="author.php" class="btn btn-warning ">Quay lại</a>
+                        <a href="category.php" class="btn btn-warning ">Quay lại</a>
                     </div>
                 </form>
             </div>
