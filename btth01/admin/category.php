@@ -47,7 +47,7 @@
         <!-- <h3 class="text-center text-uppercase mb-3 text-primary">CẢM NHẬN VỀ BÀI HÁT</h3> -->
         <div class="row">
             <div class="col-sm">
-                <a href="add_category.php" class="btn btn-success">Thêm mới</a>
+                <a href="add_category.php" class="btn btn-success">Thêm mới </a>
                 <table class="table">
                     <thead>
                         <tr>
@@ -61,7 +61,8 @@
                         
                         <?php
                         include '../database/db.php'; // Kết nối SQL
-
+                        $status = isset($_GET['status']) ? $_GET['status'] : '';
+                        
                         // Truy vấn lấy danh sách thể loại
                         $sql = "SELECT ma_tloai, ten_tloai FROM theloai";
                         $result = $conn->query($sql);
@@ -86,28 +87,21 @@
                         echo "Không có thể loại nào.";
                         }
                         ?>
-                        <!-- <tr>
-                            <th scope="row">1</th>
-                            <td>Nhạc trữ tình</td>
-                            <td>
-                                <a href="edit_category.php?id=1"><i class="fa-solid fa-pen-to-square"></i></a>
-                            </td>
-                            <td>
-                                <a href=""><i class="fa-solid fa-trash"></i></a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td>Nhạc cách mạng</td>
-                            <td>
-                                <a href="edit_category.php?id=2"><i class="fa-solid fa-pen-to-square"></i></a>
-                            </td>
-                            <td>
-                                <a href=""><i class="fa-solid fa-trash"></i></a>
-                            </td>
-                        </tr> -->
-                    
+                        <script>
+                            // Lấy giá trị status từ PHP
+                            var status = "<?php echo $status; ?>";
 
+                            // Kiểm tra nếu status bằng 'updated', hiển thị thông báo thành công
+                            if (status === 'updated') {
+                                alert('Cập nhật thành công!');
+                            }
+                            else if (status === 'deleted') {
+                                alert('Xoá thành công!');
+                            }
+                            else if (status === 'success') {
+                                alert('Thêm thành công!');
+                            }
+                        </script>
                     </tbody>
                 </table>
             </div>

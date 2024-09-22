@@ -106,7 +106,7 @@ include '../database/db1.php';
  
      if($stmt_update->execute()){  
 
-     header("Location: article.php?status=updated");
+        echo '<script>alert("Sửa bài viết thành công!"); window.location.href = "author.php";</script>';
 
      exit();
 

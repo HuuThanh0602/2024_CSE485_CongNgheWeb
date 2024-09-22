@@ -53,7 +53,7 @@
             if ($stmt->execute()) {
                 
                 // Sau khi xóa thành công, quay về trang category.php
-                header("Location: category.php");
+                header("Location: category.php?status=deleted");
                 // Đảm bảo rằng quá trình dừng sau khi chuyển hướng
                 exit();
             } else {

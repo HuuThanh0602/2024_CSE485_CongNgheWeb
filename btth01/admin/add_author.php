@@ -38,10 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         if ($stmt->execute()) {
             // Chuyển hướng về trang category.php sau khi thêm thành công
-            echo "<script>
-                        alert('Thêm thành công!');
-                    </script>";
-            header("Location: author.php?status=success");
+            echo '<script>alert("Thêm tác giả thành công!"); window.location.href = "author.php";</script>';
             exit();
         } else {
             echo "Lỗi khi thêm tác giả: " . $stmt->error;

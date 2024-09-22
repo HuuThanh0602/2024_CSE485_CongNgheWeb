@@ -13,7 +13,7 @@ if (isset($_GET['ma_bviet'])) {
     // Thực thi câu lệnh xóa
     if ($stmt_delete->execute()) {
         // Chuyển hướng sau khi xóa thành công
-        header("Location: article.php?status=deleted");
+        echo '<script>alert("Xoá bài viết thành công!"); window.location.href = "author.php";</script>';
         exit();
     } else {
         echo "Có lỗi xảy ra khi xóa bài viết.";

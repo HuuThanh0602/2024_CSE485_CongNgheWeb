@@ -59,6 +59,7 @@
                     <tbody>
                         <?php 
                        include '../database/db.php'; //Kết nối SQL
+                       $status = isset($_GET['status']) ? $_GET['status'] : '';
 
                        // Truy vấn lấy danh sách tác giả
                        $sql = "SELECT ma_tgia, ten_tgia FROM tacgia";
@@ -84,28 +85,6 @@
                         echo "Không có tác giả nào.";
                        }
                         ?>
-
-                        <!-- <tr>
-                            <th scope="row">1</th>
-                            <td>Tác giả 2</td>
-                            <td>
-                                <a href="edit_author.php"><i class="fa-solid fa-pen-to-square"></i></a>
-                            </td>
-                            <td>
-                                <a href=""><i class="fa-solid fa-trash"></i></a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td>Tác giả 1</td>
-                            <td>
-                                <a href="edit_author.php"><i class="fa-solid fa-pen-to-square"></i></a>
-                            </td>
-                            <td>
-                                <a href=""><i class="fa-solid fa-trash"></i></a>
-                            </td>
-                        </tr> -->
-                       
                     </tbody>
                 </table>
             </div>

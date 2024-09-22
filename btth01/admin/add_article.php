@@ -98,11 +98,7 @@ include '../database/db1.php';
      
      // Thực thi câu lệnh SQL
      if($stmt->execute()){
-        echo "<script>
-                    alert('Thêm thành công!');
-            </script>";
-       
-     header("Location: article.php?status=success");
+        echo '<script>alert("Thêm bài viết thành công!"); window.location.href = "author.php";</script>';
      exit();
      // Dừng thực thi PHP sau khi chuyển hướng
 
