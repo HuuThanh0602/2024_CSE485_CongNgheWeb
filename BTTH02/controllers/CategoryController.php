@@ -1,5 +1,5 @@
 <?php
-include_once($_SERVER['DOCUMENT_ROOT'] . "/CSE485/BTTH02/services/CategoryService.php");
+include_once("./services/CategoryService.php");
 class CategoryController{
     // Hàm xử lý hành động index
     private $categoryS;
