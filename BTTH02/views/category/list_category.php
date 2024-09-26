@@ -1,9 +1,3 @@
-<?php
-include_once($_SERVER['DOCUMENT_ROOT'] . "/CSE485/BTTH02/services/CategoryService.php");
-$categoryService = new CategoryService();
-$categories = $categoryService->getAllCategories();
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>

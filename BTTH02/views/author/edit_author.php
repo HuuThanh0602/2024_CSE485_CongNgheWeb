@@ -1,9 +1,4 @@
-<?php
-include_once($_SERVER['DOCUMENT_ROOT'] . "/CSE485/BTTH02/controllers/AuthorController.php");
 
-$controller = new AuthorController();
-$controller->edit();
-?>
 
 <!DOCTYPE html>
 <html lang="en">

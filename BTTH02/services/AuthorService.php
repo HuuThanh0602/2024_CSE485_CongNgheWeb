@@ -1,6 +1,6 @@
 <?php
-include_once($_SERVER['DOCUMENT_ROOT'] . "/CSE485/BTTH02/configs/DBConnection.php");
-include_once($_SERVER['DOCUMENT_ROOT'] . "/CSE485/BTTH02/models/Author.php");
+include_once("./configs/DBConnection.php");
+include_once("./models/Author.php");
 
 class AuthorService{
     

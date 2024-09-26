@@ -1,9 +1,3 @@
-<?php
-include_once($_SERVER['DOCUMENT_ROOT'] . "/CSE485/BTTH02/controllers/CategoryController.php");
-
-$controller = new CategoryController();
-$controller->saveEditCategory();
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
