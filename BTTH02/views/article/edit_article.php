@@ -41,7 +41,7 @@
                     <div class="input-group mt-3 mb-3">
                         <span class="input-group-text">Tác giả</span>
                         <select class="form-control" name="author_id" required>
-                            <option value="">Chọn tác giả</option>
+                            <option value="<?php echo htmlspecialchars($AuthorsId[0]['ma_tgia']); ?>"><?php echo htmlspecialchars($AuthorsId[0]['ten_tgia']); ?></option>
                             <?php foreach ($authors as $author): ?>
                                 <option value="<?php echo $author['ma_tgia']; ?>"><?php echo htmlspecialchars($author['ten_tgia']); ?></option>
                             <?php endforeach; ?>
@@ -52,7 +52,7 @@
                     <div class="input-group mt-3 mb-3">
                         <span class="input-group-text">Thể loại</span>
                         <select class="form-control" name="category_id" required>
-                            <option value="">Chọn thể loại</option>
+                        <option value="<?php echo htmlspecialchars($categoriesId[0]['ma_tloai']); ?>"><?php echo htmlspecialchars($categoriesId[0]['ten_tloai']); ?></option>
                             <?php foreach ($categories as $category): ?>
                                 <option value="<?php echo $category['ma_tloai']; ?>"><?php echo htmlspecialchars($category['ten_tloai']); ?></option>
                             <?php endforeach; ?>

@@ -89,6 +89,36 @@ class ArticleService {
 
         return $authors;
     }
+    public function getAllAuthorsId($id) {
+        $dbConn = new DBConnection();
+        $conn = $dbConn->getConnection();  
+        if ($conn === null) {
+            return []; 
+        }
+
+        $sql_authors = "SELECT* FROM tacgia where ma_tgia = :id";
+        $stmt_authors = $conn->prepare($sql_authors);
+        $stmt_authors->bindParam(':id', $id, PDO::PARAM_INT);
+        $stmt_authors->execute();
+        $authorsId = $stmt_authors->fetchAll(PDO::FETCH_ASSOC);
+
+        return $authorsId;
+    }
+    public function getAllCategoriesId($id) {
+        $dbConn = new DBConnection();
+        $conn = $dbConn->getConnection();  
+        if ($conn === null) {
+            return []; 
+        }
+
+        $sql_categories = "SELECT ma_tloai, ten_tloai FROM theloai where ma_tloai = :id";
+        $stmt_categories = $conn->prepare($sql_categories);
+        $stmt_categories->bindParam(':id', $id, PDO::PARAM_INT);
+        $stmt_categories->execute();
+        $categoriesId = $stmt_categories->fetchAll(PDO::FETCH_ASSOC);
+
+        return $categoriesId; 
+    }
 
     public function getAllCategories() {
         $dbConn = new DBConnection();
@@ -110,9 +140,7 @@ class ArticleService {
         $conn = $dbConn->getConnection();
         $stmt = $conn->prepare("DELETE FROM baiviet WHERE ma_bviet = :id");
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
-        $stmt->execute();
-    
-                       
+        $stmt->execute();                       
     }
 
     public function getArticlebyId($id) {
@@ -121,7 +149,6 @@ class ArticleService {
         if ($conn === null) {
             return []; 
         }
-
         $sql_articles = "SELECT * FROM baiviet Where ma_bviet=:id";
         $stmt_articles = $conn->prepare($sql_articles);
         $stmt_articles->bindParam(':id', $id, PDO::PARAM_INT);
