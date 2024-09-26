@@ -1,3 +1,40 @@
+CREATE DATABASE BTTH01_CSE485;
+
+USE BTTH01_CSE485;
+
+CREATE TABLE tacgia(
+	ma_tgia int  not null primary key,
+	ten_tgia varchar(100) not null ,
+	hinh_tgia varchar(100)
+);
+
+create Table theloai(
+	ma_tloai int not null primary key ,
+	ten_tloai varchar(50) not null
+);
+
+create table baiviet(
+	ma_bviet int not null primary key,
+	tieude varchar(200) not null,
+	tenbhat varchar(100) not null,
+	ma_tloai int not null,
+	tomtat text not null,
+	noidung text,
+	ma_tgia int not null,
+	ngayviet datetime default current_timestamp not null,
+	hinhthanh varchar(200),
+	FOREIGN KEY (ma_tloai) REFERENCES theloai(ma_tloai),
+    FOREIGN KEY (ma_tgia) REFERENCES tacgia(ma_tgia)
+);
+
+---l. Bổ sung thêm bảng Users để lưu thông tin Tài khoản đăng nhập và sử dụng cho chức năng 
+---Đăng nhập/Quản trị trang web.
+CREATE TABLE Users(
+	users VARCHAR(50)  PRIMARY KEY NOT NULL,
+	passwords VARCHAR (50),
+	user_Permissions VARCHAR(50)
+	);
+
 -- truy vấn dữ liệu --
 -- a, Liệt kê các bài viết về các bài hát thuộc thể loại Nhạc trữ tình
 SELECT b.ma_bviet, b.tieude, b.tenbhat
