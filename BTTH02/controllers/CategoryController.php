@@ -18,12 +18,13 @@ class CategoryController{
             // Kiểm tra nếu thêm thành công, hiển thị trang danh sách hoặc thông báo
             if ($isAdded) {
                 // Điều hướng về danh sách thể loại hoặc hiển thị thông báo thành công
-                echo '<script>alert("Thêm thể loại thành công!"); window.location.href = "/CSE485/BTTH02/views/category/list_category.php";</script>';
+                echo '<script>alert("Thêm thể loại thành công!"); window.location.href = "./index.php?controller=category&action=list";</script>';
                 exit();
             } else {
                 echo "Thêm thể loại thất bại!";
             }
-        } 
+        }
+        
     }
     // Phương thức xoá tác giả
     public function delete() {
@@ -34,7 +35,7 @@ class CategoryController{
             $this->categoryS->deleteCatories($ma_tloai);
     
             // Sau khi xóa, chuyển hướng lại trang danh sách
-            echo '<script>alert("Xoá bài viết thành công!"); window.location.href = "views/category/list_category.php";</script>';
+            echo '<script>alert("Xoá bài viết thành công!"); window.location.href = "./index.php?controller=category&action=list";</script>';
             exit();
         } else {
             // Nếu không có id trong yêu cầu, xử lý lỗi
@@ -59,24 +60,41 @@ class CategoryController{
             // Kiểm tra xem việc chỉnh sửa có thành công không
             if ($isEdited) {
             // Nếu thành công, điều hướng về trang danh sách thể loại
-                echo '<script>alert("Sửa thể loại thành công!"); window.location.href = "/CSE485/BTTH02/views/category/list_category.php";</script>';
+                echo '<script>alert("Sửa thể loại thành công!"); window.location.href = "./index.php?controller=category&action=list";</script>';
                 exit();
             } else {
             // Nếu thất bại, hiển thị thông báo lỗi
-                echo '<script>alert("Sửa thể loại thất bại!"); window.location.href = "/CSE485/BTTH02/views/category/list_category.php";</script>';
+                echo '<script>alert("Sửa thể loại thất bại!"); window.location.href = "./index.php?controller=category&action=list";</script>';
             }
         }
     }
     
 
-    // public function list(){
-    //     // Nhiệm vụ 1: Tương tác với Services/Models
-    //     $categories = $this->categoryS->getAllCategories();
+    public function list(){
+        // Nhiệm vụ 1: Tương tác với Services/Models
+        $categories = $this->categoryS->getAllCategories();
 
-    //     // Nhiệm vụ 2: Tương tác với View
+        // Nhiệm vụ 2: Tương tác với View
         
-    //     include("views/category/list_category.php");
+        include_once("views/category/list_category.php");
        
-    // }
+    }
+    public function viewsAdd(){
+       
+        include_once("views/category/add_category.php");
+    }
+    public function viewsDel(){
+        $category_id = intval($_GET['id']);
+        $category_name = isset($_GET['name']) ? $_GET['name'] : '';
+        $category_name = urldecode($category_name);
+        include_once("views/category/delete_category.php");
+    }
+
+    public function viewsEdit(){
+        $category_id = intval($_GET['id']);
+        $category_name = isset($_GET['name']) ? $_GET['name'] : '';
+        $category_name = urldecode($category_name);
+        include_once("views/category/edit_category.php");
+    }
 }
 ?>

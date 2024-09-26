@@ -28,16 +28,16 @@ $categories = $categoryService->getAllCategories();
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="./">Trang chủ</a>
+                        <a class="nav-link" aria-current="page" href="./index.php?controller=Admini&action=index">Trang chủ</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="../index.php">Trang ngoài</a>
+                        <a class="nav-link" href="./index.php">Trang ngoài</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active fw-bold" href="list_category.php">Thể loại</a>
+                        <a class="nav-link active fw-bold" href="./index.php?controller=category&action=list">Thể loại</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="../../views/author/index_author.php">Tác giả</a>
+                        <a class="nav-link" href="./index.php?controller=author&action=list">Tác giả</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="../../views/article/list_article.php">Bài viết</a>
@@ -51,7 +51,7 @@ $categories = $categoryService->getAllCategories();
         <!-- <h3 class="text-center text-uppercase mb-3 text-primary">CẢM NHẬN VỀ BÀI HÁT</h3> -->
         <div class="row">
             <div class="col-sm">
-                <a href="add_category.php" class="btn btn-success">Thêm mới </a> 
+                <a href="./index.php?controller=category&action=viewsAdd" class="btn btn-success">Thêm mới </a> 
                 <table class="table">
                     <thead>
                         <tr>
@@ -70,11 +70,11 @@ $categories = $categoryService->getAllCategories();
                                 echo "<td>" . $category->getTenTloai() . "</td>";
                                 // Thêm biểu tượng sửa với link
                                 echo "<td>
-                                        <a href='edit_category.php?id=" . $category->getMaTloai() . "&name=" . $category->getTenTloai() . "' class='text-primary'><i class='fa-solid fa-pen-to-square'></i></a>
+                                        <a href='./index.php?controller=category&action=viewsEdit&id=" . $category->getMaTloai() . "&name=". $category->getTenTloai() . "' class='text-blue'><i class='fa-solid fa-pen-to-square'></i></a>
                                       </td>";
                                 // Thêm biểu tượng xóa với link
                                 echo "<td>
-                                        <a href='delete_category.php?id=" . $category->getMaTloai() . "&name=" . $category->getTenTloai() . "' class='text-danger'><i class='fa-solid fa-trash'></i></a>
+                                        <a href='./index.php?controller=category&action=viewsDel&id=" . $category->getMaTloai() . "&name=". $category->getTenTloai() . "' class='text-danger'><i class='fa-solid fa-trash'></i></a>
                                       </td>";
                                 echo "</tr>";
                             }

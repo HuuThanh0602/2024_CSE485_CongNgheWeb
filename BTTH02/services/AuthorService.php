@@ -57,22 +57,22 @@ class AuthorService{
         $stmt->execute();
     }
 
-    public function getAuthorById(){
-        $dbConn = new DBConnection();
-        $conn = $dbConn->getConnection();
+    // public function getAuthorById(){
+    //     $dbConn = new DBConnection();
+    //     $conn = $dbConn->getConnection();
 
-        // Truy vấn thông tin thể loại dựa trên ID
-        $sql = "SELECT ma_tgia, ten_tgia FROM tacgia WHERE ma_tgia = ?";
-        $stmt = $conn->prepare($sql);
-        $stmt->bind_param("is", $ma_tgia); // 'i' nghĩa là kiểu số nguyên
-        $stmt->execute();
+    //     // Truy vấn thông tin thể loại dựa trên ID
+    //     $sql = "SELECT ma_tgia, ten_tgia FROM tacgia WHERE ma_tgia = ?";
+    //     $stmt = $conn->prepare($sql);
+    //     $stmt->bind_param("is", $ma_tgia); // 'i' nghĩa là kiểu số nguyên
+    //     $stmt->execute();
 
-        $result = $stmt->get_result();
-        if ($row = $result->fetch_assoc()) {
-            return new Category($row['ma_tgia'], $row['ten_tgia']);
-        }
-            return null;
-    }
+    //     $result = $stmt->get_result();
+    //     if ($row = $result->fetch_assoc()) {
+    //         return new Author($row['ma_tgia'], $row['ten_tgia']);
+    //     }
+    //         return null;
+    // }
 
     public function editAuthor($ten_tgia, $ma_tgia){
         // Khởi tạo kết nối đến cơ sở dữ liệu

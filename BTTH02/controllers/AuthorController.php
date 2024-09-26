@@ -18,7 +18,7 @@ class AuthorController{
             // Kiểm tra nếu thêm thành công, hiển thị trang danh sách hoặc thông báo
             if ($isAdded) {
                 // Điều hướng về danh sách thể loại hoặc hiển thị thông báo thành công
-                echo '<script>alert("Thêm tác giả thành công!"); window.location.href = "/CSE485/BTTH02/views/author/index_author.php";</script>';
+                echo '<script>alert("Thêm tác giả thành công!"); window.location.href = "./index.php?controller=author&action=list";</script>';
                 exit();
             } else {
                 echo "Thêm tác giả thất bại!";
@@ -31,7 +31,7 @@ class AuthorController{
             $ma_tgia = $_GET['id'];
             // Gọi đến phương thức delete trong service 
             $this->authorService->deleteAuthor($ma_tgia);
-            echo '<script>alert("Xoá tác giả thành công!"); window.location.href = "/CSE485/BTTH02/views/author/index_author.php";</script>';
+            echo '<script>alert("Xoá tác giả thành công!"); window.location.href = "./index.php?controller=author&action=list";</script>';
             exit();
     }
 }
@@ -47,13 +47,30 @@ class AuthorController{
             // Kiểm tra xem việc chỉnh sửa có thành công không
             if ($isEdited) {
             // Nếu thành công, điều hướng về trang danh sách thể loại
-                echo '<script>alert("Sửa tác giả thành công!"); window.location.href = "/CSE485/BTTH02/views/author/index_author.php";</script>';
+                echo '<script>alert("Sửa tác giả thành công!"); window.location.href = "./index.php?controller=author&action=list";</script>';
                 exit();
             } else {
             // Nếu thất bại, hiển thị thông báo lỗi
-                echo '<script>alert("Sửa tác giả thất bại!"); window.location.href = "/CSE485/BTTH02/views/author/index_author.php";</script>';
+                echo '<script>alert("Sửa tác giả thất bại!"); window.location.href = "./index.php?controller=author&action=list";</script>';
             }
         }
+    }
+
+    public function list(){
+        $authors = $this->authorService->getAllAuthor();
+        include("views/author/index_author.php");
+    }
+
+    public function viewsAdd(){
+       
+        include_once("views/author/add_author.php");
+    }
+
+    public function viewsEdit(){
+        $author_id = intval($_GET['id']);
+        $author_name = isset($_GET['name']) ? $_GET['name'] : '';
+        $author_name = urldecode($author_name);
+        include_once("views/author/edit_author.php");
     }
 }
 ?>

@@ -1,12 +1,9 @@
 <?php
 include_once($_SERVER['DOCUMENT_ROOT'] . "/CSE485/BTTH02/services/AuthorService.php");
-// include_once($_SERVER['DOCUMENT_ROOT'] . "/CSE485/BTTH02/controllers/AuthorController.php");
 $authorService = new AuthorService();
 $authors = $authorService->getAllAuthor();
-
-// $controller = new AuthorController();
-// $controllers = $controller->delete();
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,7 +16,7 @@ $authors = $authorService->getAllAuthor();
     <link rel="stylesheet" href="css/style_login.css">
 </head>
 <body>
-    <header>
+<header>
         <nav class="navbar navbar-expand-lg bg-body-tertiary shadow p-3 bg-white rounded">
             <div class="container-fluid">
                 <div class="h3">
@@ -31,31 +28,30 @@ $authors = $authorService->getAllAuthor();
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="./">Trang chủ</a>
+                        <a class="nav-link" aria-current="page" href="./index.php?controller=Admini&action=index">Trang chủ</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="../index.php">Trang ngoài</a>
+                        <a class="nav-link" href="./index.php">Trang ngoài</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link " href="../../views/category/list_category.php">Thể loại</a>
+                        <a class="nav-link" href="./index.php?controller=category&action=list">Thể loại</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active fw-bold" href="index_author.php">Tác giả</a>
+                        <a class="nav-link active fw-bold" href="./index.php?controller=author&action=list">Tác giả</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="article.php">Bài viết</a>
+                        <a class="nav-link" href="../../views/article/list_article.php">Bài viết</a>
                     </li>
                 </ul>
                 </div>
             </div>
         </nav>
-
     </header>
     <main class="container mt-5 mb-5">
         <!-- <h3 class="text-center text-uppercase mb-3 text-primary">CẢM NHẬN VỀ BÀI HÁT</h3> -->
         <div class="row">
             <div class="col-sm">
-                <a href="add_author.php" class="btn btn-success">Thêm mới</a>
+                <a href="./index.php?controller=author&action=viewsAdd" class="btn btn-success">Thêm mới</a>
                 <table class="table">
                     <thead>
                         <tr>
@@ -74,13 +70,13 @@ $authors = $authorService->getAllAuthor();
                         echo "<td>" . $author->getName() . "</td>";
                         // Thêm biểu tượng sửa với link
                         echo "<td>
-                                <a href='edit_author.php?id=" . $author->getId() . "&name=" . $author->getName() . "' class='text-primary'><i class='fa-solid fa-pen-to-square'></i></a>
-                              </td>";
-                        // Thêm biểu tượng xóa với link
-                        echo "<td>
-                                <a href='../../index.php?controller=author&action=delete&id=" . $author->getId() . "' class='text-danger'><i class='fa-solid fa-trash'></i></a>
-                              </td>";
-                        echo "</tr>";
+                                        <a href='./index.php?controller=author&action=viewsEdit&id=" . $author->getId() . "&name=". $author->getName() . "' class='text-blue'><i class='fa-solid fa-pen-to-square'></i></a>
+                                      </td>";
+                                // Thêm biểu tượng xóa với link
+                                echo "<td>
+                                        <a href='./index.php?controller=author&action=delete&id=" . $author->getId() . "' class='text-danger'><i class='fa-solid fa-trash'></i></a>
+                                      </td>";
+                                echo "</tr>";
                         }
                     ?>
                     </tbody>
