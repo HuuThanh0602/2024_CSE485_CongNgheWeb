@@ -1,5 +1,5 @@
 <?php
-include_once($_SERVER['DOCUMENT_ROOT'] . "/CSE485/BTTH02/controllers/CategoryController.php");
+include_once("./controllers/CategoryController.php");
 
 $controller = new CategoryController();
 $controller->add();
