@@ -1,20 +1,23 @@
 <?php
-include('models/Article.php');
+
+require_once('./services/ArticleService.php');
 
 class HomeController {
-    private $Song;
+    private $articleService;
 
     public function __construct() {
-        // Khởi tạo đối tượng từ class Article
-        $this->Song = new Article();
+        $this->articleService = new ArticleService();
     }
 
     public function index() {
-        // Gọi phương thức getTopSongs để lấy dữ liệu từ Model
-        $songs = $this->Song->getTopSongs();
         
-        // Chuyển dữ liệu tới View index.php để hiển thị
-        include ('../btth1/views/home/index.php');
+        $articles = $this->articleService->getAllArticles();
+         
+        include('views/home/index.php');
+    }
+    public function detail(){
+        $id=$_GET['id'];
+        $detail = $this->articleService->getArticlebyId($id);
+        include('views/home/detail.php');
     }
 }
-?>

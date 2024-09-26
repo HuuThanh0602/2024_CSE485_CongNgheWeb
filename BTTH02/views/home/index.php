@@ -1,21 +1,3 @@
-<!-- <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <ul>
-        <li><a href="./index.php">Trang chủ</a></li>
-        <li><a href="./index.php?controller=article&action=list">Bài viết</a></li>
-    </ul>
-    <h1>Tôi là TRANG CHỦ</h1>
-   
-</body>
-</html> -->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -31,7 +13,7 @@
         <nav class="navbar navbar-expand-lg bg-body-tertiary shadow p-3 bg-white rounded">
             <div class="container-fluid">
                 <div class="my-logo">
-                    <a class="navbar-brand" href="#">
+                    <a class="navbar-brand" href="">
                         <img src="assets/images/logo2.png" alt="logo" class="img-fluid">
                     </a>
                 </div>
@@ -44,11 +26,11 @@
                     <a class="nav-link active" aria-current="page" href="./">Trang chủ</a>
                     </li>
                     <li class="nav-item">
-                    <a class="nav-link" href="./login.php">Đăng nhập</a>
+                    <a class="nav-link" href="./index.php?controller=Member&action=login">Đăng nhập</a>
                     </li>
                 </ul>
                 <form class="d-flex" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Nội dung cần tìm" aria-label="Search">
+                    <inpuvt class="form-control me-2" type="search" placeholder="Nội dung cần tìm" aria-label="Search">
                     <button class="btn btn-outline-success" type="submit">Tìm</button>
                 </form>
                 </div>
@@ -86,19 +68,14 @@
     <main class="container-fluid mt-3">
         <h3 class="text-center text-uppercase mb-3 text-primary">TOP bài hát yêu thích</h3>
         <div class="row">
-        <?php foreach ($songs as $song): ?>
-        <?php
-        // Gán dữ liệu từ cơ sở dữ liệu vào các biến
-        $tieude = htmlspecialchars($song['tenbhat']);
-        $hinhanh = htmlspecialchars($song['hinhthanh']);
-        $duongdan = urlencode($song['ma_bviet']);
-        ?>
+        <?php foreach ($articles as $article): ?>
+            <?php $id =$article->getIdBaiviet();?>
         <div class="col-sm-3">
             <div class="card mb-2" style="width: 100%;">
-                <img src="./assets/images/songs/<?php echo $hinhanh; ?>.jpg" class="card-img-top" alt="<?php echo $tieude; ?>">
+                <img src="./assets/images/songs/<?php echo $article->getHinhthanh(); ?>.jpg" class="card-img-top" alt="<?php echo $article->getTieude(); ?>">
                 <div class="card-body">
                     <h5 class="card-title text-center">
-                        <a href="detail.php?song_id=<?php echo $duongdan; ?>" class="text-decoration-none"><?php echo $tieude; ?></a>
+                        <a href="./index.php?controller=Home&action=detail&id=<?php echo $id ?>" class="text-decoration-none"><?php echo $article->getTenbhat(); ?></a>
                     </h5>
                 </div>
             </div>
