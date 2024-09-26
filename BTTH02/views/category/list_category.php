@@ -1,5 +1,5 @@
 <?php
-include_once($_SERVER['DOCUMENT_ROOT'] . "/CSE485/BTTH02/services/CategoryService.php");
+include_once("./services/CategoryService.php");
 $categoryService = new CategoryService();
 $categories = $categoryService->getAllCategories();
 ?>
