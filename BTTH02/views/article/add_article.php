@@ -15,7 +15,7 @@
         <div class="row">
             <div class="col-sm">
                 <h3 class="text-center text-uppercase fw-bold">Thêm mới bài viết</h3>
-                <form action="../BTTH02/index.php?controller=Article&action=addArticle" method="post">
+                <form action="./index.php?controller=Article&action=addArticle" method="post">
                     <div class="input-group mt-3 mb-3">
                         <span class="input-group-text" id="lblTitleName">Tên tiêu đề </span>
                         <input type="text" class="form-control" name="txtTitle" >
@@ -59,7 +59,7 @@
 
                     <div class="form-group  float-end ">
                         <input type="submit" value="Thêm" class="btn btn-success">
-                        <a href="../BTTH02/index.php?controller=Article&action=list" class="btn btn-warning ">Quay lại</a>
+                        <a href="./index.php?controller=Article&action=list" class="btn btn-warning ">Quay lại</a>
                     </div>
                     
                 </form>
