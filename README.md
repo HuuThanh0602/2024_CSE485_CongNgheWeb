@@ -1,1 +1,1 @@
-Đổi cổng port ở 2 file DataConnecton trong config để chạy BTTH02(ở Database ở BTHH01)
+Đổi cổng port ở 2 file DataConnecton trong config ở BTTH02(ở Database ở BTHH01) để chạy dự án
