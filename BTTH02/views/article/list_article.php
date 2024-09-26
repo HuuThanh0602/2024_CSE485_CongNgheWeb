@@ -46,12 +46,13 @@
         <a href="./index.php?controller=Article&action=viewsAdd" class="btn btn-success" style="margin-bottom: 20px;">Thêm mới</a>        
         <div class="row">
         <?php foreach ($articles as $article): ?>
+            <?php $id =$article->getIdBaiviet();?>
         <div class="col-sm-3">
             <div class="card mb-2" style="width: 100%;">
                 <img src="./assets/images/songs/<?php echo $article->getHinhthanh(); ?>.jpg" class="card-img-top" alt="<?php echo $article->getTieude(); ?>">
                 <div class="card-body">
-                    <h5 class="card-title text-center">
-                        <a href="detail.php?song_id=<?php $article->getIdBaiviet(); ?>" class="text-decoration-none"><?php echo $article->getTenbhat(); ?></a>
+                <h5 class="card-title text-center">
+                        <a href="./index.php?controller=Home&action=detail&id=<?php echo $id ?>" class="text-decoration-none"><?php echo $article->getTenbhat(); ?></a>
                     </h5>
                     <div class="d-flex justify-content-center">
                     <a href="./index.php?controller=Article&action=viewsEdit&id=<?php echo $article->getIdBaiviet(); ?>" class="btn btn-primary btn-sm me-2">Sửa</a>

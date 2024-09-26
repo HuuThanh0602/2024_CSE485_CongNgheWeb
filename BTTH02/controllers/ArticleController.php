@@ -15,9 +15,10 @@ class ArticleController {
         include('views/article/list_article.php');
     }
 
-    public function viewsAdd(){       
+    public function viewsAdd(){      
         $authors= $this->articleService->getAllAuthors();
-        $categories= $this->articleService->getAllCategories();        
+        $categories= $this->articleService->getAllCategories();
+        
         include('views/article/add_article.php');
         
     }
@@ -47,6 +48,7 @@ class ArticleController {
     }
     public function editArticle() { 
             $id = $_GET['id'] ?? ''; 
+            
         
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $tieude = $_POST['txtTitleName'];
@@ -79,6 +81,12 @@ class ArticleController {
         $authors= $this->articleService->getAllAuthors();
         $categories= $this->articleService->getAllCategories();
         $articlesbyId = $this->articleService->getArticlebyId($id);
+        $ida=$articlesbyId['ma_tgia'];
+        $idb=$articlesbyId['ma_tloai'];
+        $AuthorsId = $this->articleService->getAllAuthorsId($ida);
+        $categoriesId = $this->articleService->getAllCategoriesId($idb);
+ 
+        echo $ida;
         include('views/article/edit_article.php');
         
     }
@@ -100,6 +108,8 @@ class ArticleController {
                   </script>";
         }
     }
+
+
     
     
 }
