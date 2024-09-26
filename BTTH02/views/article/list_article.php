@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -52,7 +53,7 @@
                 <img src="./assets/images/songs/<?php echo $article->getHinhthanh(); ?>.jpg" class="card-img-top" alt="<?php echo $article->getTieude(); ?>">
                 <div class="card-body">
                 <h5 class="card-title text-center">
-                        <a href="./index.php?controller=Home&action=detail&id=<?php echo $id ?>" class="text-decoration-none"><?php echo $article->getTenbhat(); ?></a>
+                        <a href="./index.php?controller=Article&action=detail_amin&id=<?php  echo $article->getIdBaiviet(); ?>" class="text-decoration-none"><?php echo $article->getTenbhat(); ?></a>
                     </h5>
                     <div class="d-flex justify-content-center">
                     <a href="./index.php?controller=Article&action=viewsEdit&id=<?php echo $article->getIdBaiviet(); ?>" class="btn btn-primary btn-sm me-2">Sửa</a>

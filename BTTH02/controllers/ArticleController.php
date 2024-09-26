@@ -22,6 +22,11 @@ class ArticleController {
         include('views/article/add_article.php');
         
     }
+    public function detail_amin(){
+        $id=$_GET['id'];
+        $detail = $this->articleService->getArticlebyId($id);
+        include('views/article/detail_admin.php');
+    }
     public function addArticle() {       
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $tieude = $_POST['txtTitle'];
