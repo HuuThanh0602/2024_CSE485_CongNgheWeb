@@ -79,17 +79,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     </div>
                     <div class="card-body">
                         <form method="POST" action="login.php">
+                        <form method="POST" action="login.php">
                             <div class="input-group mb-3">
                                 <span class="input-group-text" id="txtUser"><i class="fas fa-user"></i></span>
+                                <input type="text" name="username" class="form-control" placeholder="username" required>
                                 <input type="text" name="username" class="form-control" placeholder="username" required>
                             </div>
 
                             <div class="input-group mb-3">
                                 <span class="input-group-text" id="txtPass"><i class="fas fa-key"></i></span>
                                 <input type="password" name="password" class="form-control" placeholder="password" required>
+                                <input type="password" name="password" class="form-control" placeholder="password" required>
                             </div>
 
+
                             <div class="row align-items-center remember">
+                                <input type="checkbox"> Remember Me
                                 <input type="checkbox"> Remember Me
                             </div>
                             <div class="form-group">

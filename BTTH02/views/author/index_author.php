@@ -1,3 +1,9 @@
+<?php
+include_once($_SERVER['DOCUMENT_ROOT'] . "/CSE485/BTTH02/services/AuthorService.php");
+$authorService = new AuthorService();
+$authors = $authorService->getAllAuthor();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,8 +16,7 @@
     <link rel="stylesheet" href="css/style_login.css">
 </head>
 <body>
-    
-    <header>
+<header>
         <nav class="navbar navbar-expand-lg bg-body-tertiary shadow p-3 bg-white rounded">
             <div class="container-fluid">
                 <div class="h3">
@@ -23,19 +28,19 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="./">Trang chủ</a>
+                        <a class="nav-link" aria-current="page" href="./index.php?controller=Admini&action=index">Trang chủ</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="../index.php">Trang ngoài</a>
+                        <a class="nav-link" href="./index.php">Trang ngoài</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active fw-bold" href="category.php">Thể loại</a>
+                        <a class="nav-link " href="./index.php?controller=category&action=list">Thể loại</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="author.php">Tác giả</a>
+                        <a class="nav-link active fw-bold" href="">Tác giả</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="article.php">Bài viết</a>
+                        <a class="nav-link" href="./index.php?controller=Article&action=list">Bài viết</a>
                     </li>
                 </ul>
                 </div>
@@ -46,61 +51,34 @@
         <!-- <h3 class="text-center text-uppercase mb-3 text-primary">CẢM NHẬN VỀ BÀI HÁT</h3> -->
         <div class="row">
             <div class="col-sm">
-                <a href="add_category.php" class="btn btn-success">Thêm mới </a>
+                <a href="./index.php?controller=author&action=viewsAdd" class="btn btn-success">Thêm mới</a>
                 <table class="table">
                     <thead>
                         <tr>
                             <th scope="col">#</th>
-                            <th scope="col">Tên thể loại</th>
+                            <th scope="col">Tên Tác giả</th>
                             <th>Sửa</th>
                             <th>Xóa</th>
                         </tr>
                     </thead>
                     <tbody>
-                        
-                        <?php
-                        include '../database/db.php'; // Kết nối SQL
-                        $status = isset($_GET['status']) ? $_GET['status'] : '';
-                        
-                        // Truy vấn lấy danh sách thể loại
-                        $sql = "SELECT ma_tloai, ten_tloai FROM theloai";
-                        $result = $conn->query($sql);
-
-                        if ($result->num_rows > 0) {
-                        // Hiển thị thể loại
-                        while($row = $result->fetch_assoc()) {
-                            echo "<tr>";
-                            echo "<td>" . $row['ma_tloai'] . "</td>";
-                            echo "<td>" . $row['ten_tloai'] . "</td>";
-                            // Thêm biểu tượng sửa với link
-                            echo "<td>
-                                    <a href='edit_category.php?id=" . $row['ma_tloai'] . "' class='text-primary'><i class='fa-solid fa-pen-to-square'></i></a>
-                                </td>";
-                            // Thêm biểu tượng xóa với link
-                            echo "<td>
-                                    <a href='delete_category.php?id=" . $row['ma_tloai'] . "' class='text-danger'><i class='fa-solid fa-trash'></i></a>
-                                </td>";
-                            echo "</tr>";
+                    <?php 
+                       // Hiển thị thể loại
+                       foreach ($authors as $author) {
+                        echo "<tr>";
+                        echo "<td>" . $author->getId() . "</td>";
+                        echo "<td>" . $author->getName() . "</td>";
+                        // Thêm biểu tượng sửa với link
+                        echo "<td>
+                                        <a href='./index.php?controller=author&action=viewsEdit&id=" . $author->getId() . "&name=". $author->getName() . "' class='text-blue'><i class='fa-solid fa-pen-to-square'></i></a>
+                                      </td>";
+                                // Thêm biểu tượng xóa với link
+                                echo "<td>
+                                        <a href='./index.php?controller=author&action=delete&id=" . $author->getId() . "' class='text-danger'><i class='fa-solid fa-trash'></i></a>
+                                      </td>";
+                                echo "</tr>";
                         }
-                        } else {
-                        echo "Không có thể loại nào.";
-                        }
-                        ?>
-                        <script>
-                            // Lấy giá trị status từ PHP
-                            var status = "<?php echo $status; ?>";
-
-                            // Kiểm tra nếu status bằng 'updated', hiển thị thông báo thành công
-                            if (status === 'updated') {
-                                alert('Cập nhật thành công!');
-                            }
-                            else if (status === 'deleted') {
-                                alert('Xoá thành công!');
-                            }
-                            else if (status === 'success') {
-                                alert('Thêm thành công!');
-                            }
-                        </script>
+                    ?>
                     </tbody>
                 </table>
             </div>

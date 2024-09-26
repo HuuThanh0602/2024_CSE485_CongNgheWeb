@@ -46,7 +46,11 @@
 
 use LDAP\Result;
 
+<<<<<<< HEAD
 include '../database/db1.php';
+=======
+include '../Database/db1.php';
+>>>>>>> NguyenThaiSon
 //hàm tính tổng số lượng người dùng
 function getUser() {
     global $pdo;

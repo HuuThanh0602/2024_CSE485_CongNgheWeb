@@ -9,7 +9,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
 </head>
 <body>
-    <header>
+<header>
+<header>
         <nav class="navbar navbar-expand-lg bg-body-tertiary shadow p-3 bg-white rounded">
             <div class="container-fluid">
                 <div class="h3">
@@ -27,13 +28,13 @@
                         <a class="nav-link" href="./index.php">Trang ngoài</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="category.php">Thể loại</a>
+                        <a class="nav-link " href="./index.php?controller=category&action=list">Thể loại</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link " href="author.php">Tác giả</a>
+                        <a class="nav-link" href="./index.php?controller=author&action=list">Tác giả</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link  active fw-bold" href="./index.php?controller=Article&action=list">Bài viết</a>
+                        <a class="nav-link active fw-bold" href="">Bài viết</a>
                     </li>
                 </ul>
                 </div>

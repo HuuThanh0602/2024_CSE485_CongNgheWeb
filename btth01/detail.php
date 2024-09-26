@@ -84,9 +84,11 @@ include './database/db1.php';
                 <div class="row mb-5">
                     <div class="col-sm-4">
                         <img src="./images/songs/<?php echo $hinhthanh; ?>.jpg" class="img-fluid" alt="...">
+                        <img src="./images/songs/<?php echo $hinhthanh; ?>.jpg" class="img-fluid" alt="...">
                     </div>
                     <div class="col-sm-8">
                         <h5 class="card-title mb-2">
+                            <a href="" class="text-decoration-none"><?php echo $tieude?></a>
                             <a href="" class="text-decoration-none"><?php echo $tieude?></a>
                         </h5>
                         <p class="card-text"><span class=" fw-bold">Bài hát: </span><?php echo $tenbhat?></p>
@@ -94,8 +96,14 @@ include './database/db1.php';
                         <p class="card-text"><span class=" fw-bold">Tóm tắt: </span><?php echo $tomtat?></p>
                         <p class="card-text"><span class=" fw-bold">Nội dung: </span><?php echo $noidung?></p>
                         <p class="card-text"><span class=" fw-bold">Tác giả: </span><?php echo $ten_tgia?></p>
+                        <p class="card-text"><span class=" fw-bold">Bài hát: </span><?php echo $tenbhat?></p>
+                        <p class="card-text"><span class=" fw-bold">Thể loại: </span><?php echo $ten_tloai ?></p>
+                        <p class="card-text"><span class=" fw-bold">Tóm tắt: </span><?php echo $tomtat?></p>
+                        <p class="card-text"><span class=" fw-bold">Nội dung: </span><?php echo $noidung?></p>
+                        <p class="card-text"><span class=" fw-bold">Tác giả: </span><?php echo $ten_tgia?></p>
 
                     </div>          
+                </div>
                 </div>
     </main>
     <footer class="bg-white d-flex justify-content-center align-items-center border-top border-secondary  border-2" style="height:80px">

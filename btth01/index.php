@@ -65,6 +65,15 @@
             </div>
     </header>
 <?php 
+include '../btth01/Database/db1.php';
+$sql = "SELECT hinhthanh, tenbhat, ma_bviet FROM baiviet";
+$stmt = $pdo->prepare($sql);
+$stmt->execute();
+
+// Lấy toàn bộ dữ liệu
+$songs = $stmt->fetchAll(PDO::FETCH_ASSOC);
+?>
+<?php 
 include './database/db1.php';
 $sql = "SELECT hinhthanh, tenbhat, ma_bviet FROM baiviet";
 $stmt = $pdo->prepare($sql);
@@ -90,8 +99,25 @@ $songs = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <h5 class="card-title text-center">
                         <a href="detail.php?song_id=<?php echo $duongdan; ?>" class="text-decoration-none"><?php echo $tieude; ?></a>
                     </h5>
+        <?php foreach ($songs as $song): ?>
+        <?php
+        // Gán dữ liệu từ cơ sở dữ liệu vào các biến
+        $tieude = htmlspecialchars($song['tenbhat']);
+        $hinhanh = htmlspecialchars($song['hinhthanh']);
+        $duongdan = urlencode($song['ma_bviet']);
+        ?>
+        <div class="col-sm-3">
+            <div class="card mb-2" style="width: 100%;">
+                <img src="images/songs/<?php echo $hinhanh; ?>.jpg" class="card-img-top" alt="<?php echo $tieude; ?>">
+                <div class="card-body">
+                    <h5 class="card-title text-center">
+                        <a href="detail.php?song_id=<?php echo $duongdan; ?>" class="text-decoration-none"><?php echo $tieude; ?></a>
+                    </h5>
                 </div>
             </div>
+        </div>
+    <?php endforeach; ?>
+        </div>       
         </div>
     <?php endforeach; ?>
         </div>       
