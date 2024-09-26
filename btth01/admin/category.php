@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="css/style_login.css">
 </head>
 <body>
+    
     <header>
         <nav class="navbar navbar-expand-lg bg-body-tertiary shadow p-3 bg-white rounded">
             <div class="container-fluid">
@@ -28,10 +29,10 @@
                         <a class="nav-link" href="../index.php">Trang ngoài</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link " href="category.php">Thể loại</a>
+                        <a class="nav-link active fw-bold" href="category.php">Thể loại</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active fw-bold" href="author.php">Tác giả</a>
+                        <a class="nav-link" href="author.php">Tác giả</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="article.php">Bài viết</a>
@@ -46,66 +47,61 @@
         <!-- <h3 class="text-center text-uppercase mb-3 text-primary">CẢM NHẬN VỀ BÀI HÁT</h3> -->
         <div class="row">
             <div class="col-sm">
-                <a href="add_author.php" class="btn btn-success">Thêm mới</a>
+                <a href="add_category.php" class="btn btn-success">Thêm mới </a>
                 <table class="table">
                     <thead>
                         <tr>
                             <th scope="col">#</th>
-                            <th scope="col">Tên Tác giả</th>
+                            <th scope="col">Tên thể loại</th>
                             <th>Sửa</th>
                             <th>Xóa</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <?php 
-                       include '../Database/db.php'; //Kết nối SQL
+                        
+                        <?php
+                        include '../database/db.php'; // Kết nối SQL
+                        $status = isset($_GET['status']) ? $_GET['status'] : '';
+                        
+                        // Truy vấn lấy danh sách thể loại
+                        $sql = "SELECT ma_tloai, ten_tloai FROM theloai";
+                        $result = $conn->query($sql);
 
-                       // Truy vấn lấy danh sách tác giả
-                       $sql = "SELECT ma_tgia, ten_tgia FROM tacgia";
-                       $result = $conn->query($sql);
-
-                       if($result->num_rows > 0){
-                        // hiển thị danh sách tác giả
+                        if ($result->num_rows > 0) {
+                        // Hiển thị thể loại
                         while($row = $result->fetch_assoc()) {
                             echo "<tr>";
-                            echo "<td>" . $row['ma_tgia'] . "</td>";
-                            echo "<td>" . $row['ten_tgia'] . "</td>";
+                            echo "<td>" . $row['ma_tloai'] . "</td>";
+                            echo "<td>" . $row['ten_tloai'] . "</td>";
                             // Thêm biểu tượng sửa với link
                             echo "<td>
-                                    <a href='edit_author.php?id=" . $row['ma_tgia'] . "' class='text-primary'><i class='fa-solid fa-pen-to-square'></i></a>
+                                    <a href='edit_category.php?id=" . $row['ma_tloai'] . "' class='text-primary'><i class='fa-solid fa-pen-to-square'></i></a>
                                 </td>";
                             // Thêm biểu tượng xóa với link
                             echo "<td>
-                                    <a href='erase_author.php?id=" . $row['ma_tgia'] . "' class='text-danger' onclick = 'return confirm(\"Bạn có chắc chắn muốn xóa tác giả này không?\")'><i class='fa-solid fa-trash'></i></a>
+                                    <a href='delete_category.php?id=" . $row['ma_tloai'] . "' class='text-danger'><i class='fa-solid fa-trash'></i></a>
                                 </td>";
                             echo "</tr>";
                         }
                         } else {
-                        echo "Không có tác giả nào.";
-                       }
+                        echo "Không có thể loại nào.";
+                        }
                         ?>
+                        <script>
+                            // Lấy giá trị status từ PHP
+                            var status = "<?php echo $status; ?>";
 
-                        <!-- <tr>
-                            <th scope="row">1</th>
-                            <td>Tác giả 2</td>
-                            <td>
-                                <a href="edit_author.php"><i class="fa-solid fa-pen-to-square"></i></a>
-                            </td>
-                            <td>
-                                <a href=""><i class="fa-solid fa-trash"></i></a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td>Tác giả 1</td>
-                            <td>
-                                <a href="edit_author.php"><i class="fa-solid fa-pen-to-square"></i></a>
-                            </td>
-                            <td>
-                                <a href=""><i class="fa-solid fa-trash"></i></a>
-                            </td>
-                        </tr> -->
-                       
+                            // Kiểm tra nếu status bằng 'updated', hiển thị thông báo thành công
+                            if (status === 'updated') {
+                                alert('Cập nhật thành công!');
+                            }
+                            else if (status === 'deleted') {
+                                alert('Xoá thành công!');
+                            }
+                            else if (status === 'success') {
+                                alert('Thêm thành công!');
+                            }
+                        </script>
                     </tbody>
                 </table>
             </div>

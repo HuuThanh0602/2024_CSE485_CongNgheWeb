@@ -38,6 +38,32 @@
             </div>
         </nav>
 
+<?php
+include '../btth01/Database/db.php';
+?>
+<?php 
+session_start();
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $input_username = $_POST['username'];
+    $input_password = $_POST['password'];
+
+    // Tìm kiếm người dùng trong cơ sở dữ liệu
+    $stmt = $pdo->prepare("SELECT * FROM users WHERE users = :username AND passwords = :password");
+    $stmt->execute(['username' => $input_username, 'password' => $input_password]);
+    $user = $stmt->fetch();
+
+    if ($user) {
+        // Nếu người dùng tồn tại, đăng nhập thành công
+        echo "Đăng nhập thành công! Chào mừng " . $user['username'];
+        // Chuyển hướng hoặc thực hiện hành động tiếp theo
+        header('Location: admin/index.php'); // Ví dụ chuyển hướng đến trang dashboard
+        exit;
+    } else {
+        // Đăng nhập thất bại
+        echo "<div class='alert alert-danger'>Tên đăng nhập hoặc mật khẩu không chính xác!</div>";
+    }
+}
+?>
     </header>
     <main class="container mt-5 mb-5">
         <!-- <h3 class="text-center text-uppercase mb-3 text-primary">CẢM NHẬN VỀ BÀI HÁT</h3> -->
@@ -52,19 +78,19 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <form>
+                        <form method="POST" action="login.php">
                             <div class="input-group mb-3">
                                 <span class="input-group-text" id="txtUser"><i class="fas fa-user"></i></span>
-                                <input type="text" class="form-control" placeholder="username" >
+                                <input type="text" name="username" class="form-control" placeholder="username" required>
                             </div>
 
                             <div class="input-group mb-3">
                                 <span class="input-group-text" id="txtPass"><i class="fas fa-key"></i></span>
-                                <input type="text" class="form-control" placeholder="password" >
+                                <input type="password" name="password" class="form-control" placeholder="password" required>
                             </div>
-                            
+
                             <div class="row align-items-center remember">
-                                <input type="checkbox">Remember Me
+                                <input type="checkbox"> Remember Me
                             </div>
                             <div class="form-group">
                                 <input type="submit" value="Login" class="btn float-end login_btn">

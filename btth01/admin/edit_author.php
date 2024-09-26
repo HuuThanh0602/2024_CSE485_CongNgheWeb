@@ -17,7 +17,7 @@
 <body>
     <?php 
     // Kết nối với cơ sở dữ liệu
-    include '../Database/db.php';
+    include '../database/db.php';
 
     // Lấy ID thể loại từ URL
     $catId = isset($_GET['id']) ? intval($_GET['id']) : 0;
@@ -51,7 +51,7 @@
             $stmt->bind_param("si", $ten_tgia, $catId);
                 if ($stmt->execute()) {
                     // Sau khi thêm thành công, chuyển hướng về category.php
-                    header("Location: author.php?status=updated");
+                    echo '<script>alert("Sửa tác giả thành công!"); window.location.href = "author.php";</script>';
                     exit();
                 } else {
                     echo "Lỗi khi sửa tác giả: " . $stmt->error;
@@ -104,17 +104,16 @@
 
 
                 <form action= "" method="post">
-                    <input type="hidden" name="id" value="<?php echo $catId; ?>">
+                    
+                    <div class="input-group mt-3 mb-3">
+                        <span class="input-group-text" id="lblCatId">Mã tác giả</span>
+                        <input type="text" class="form-control" name="txtCatId" readonly value= "<?php echo $catId; ?>">
+                    </div>
                     <div class="input-group mt-3 mb-3">
                         <span class="input-group-text" id="lblAutName">Tên tác giả</span>
                         <input type="text" class="form-control" name="ten_tgia" value="<?php echo $catName; ?>">
                     </div>
-
-                    <div class="input-group mt-3 mb-3">
-                        <span class="input-group-text" id="lblAutImg">Ảnh tác giả</span>
-                        <input type="file" class="form-control" name="fileAutImg" accept="image/*">
-                    </div>
-
+                    
                     <div class="form-group float-end">
                         <input type="submit" value="Lưu lại" class="btn btn-success">
                         <a href="author.php" class="btn btn-warning">Quay lại</a>

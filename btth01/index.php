@@ -64,63 +64,38 @@
             </button>
             </div>
     </header>
+<?php 
+include '../btth01/Database/db1.php';
+
+$sql = "SELECT hinhthanh, tenbhat, ma_bviet FROM baiviet";
+$stmt = $pdo->prepare($sql);
+$stmt->execute();
+
+// Lấy toàn bộ dữ liệu
+$songs = $stmt->fetchAll(PDO::FETCH_ASSOC);
+?>
     <main class="container-fluid mt-3">
         <h3 class="text-center text-uppercase mb-3 text-primary">TOP bài hát yêu thích</h3>
         <div class="row">
-            <div class="col-sm-3">
-                <div class="card mb-2" style="width: 100%;">
-                    <img src="images/songs/cayvagio.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title text-center">
-                            <a href="" class="text-decoration-none">Cây, lá và gió</a>
-                        </h5>
-                    </div>
+        <?php foreach ($songs as $song): ?>
+        <?php
+        // Gán dữ liệu từ cơ sở dữ liệu vào các biến
+        $tieude = htmlspecialchars($song['tenbhat']);
+        $hinhanh = htmlspecialchars($song['hinhthanh']);
+        $duongdan = urlencode($song['ma_bviet']);
+        ?>
+        <div class="col-sm-3">
+            <div class="card mb-2" style="width: 100%;">
+                <img src="images/songs/<?php echo $hinhanh; ?>.jpg" class="card-img-top" alt="<?php echo $tieude; ?>">
+                <div class="card-body">
+                    <h5 class="card-title text-center">
+                        <a href="detail.php?song_id=<?php echo $duongdan; ?>" class="text-decoration-none"><?php echo $tieude; ?></a>
+                    </h5>
                 </div>
             </div>
-
-            <div class="col-sm-3">
-                <div class="card mb-2" style="width: 100%;">
-                    <img src="images/songs/csmt.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title text-center">
-                            <a href="" class="text-decoration-none">Cuộc sống mến thương</a>
-                        </h5>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-sm-3">
-                <div class="card mb-2" style="width: 100%;">
-                    <img src="images/songs//longme.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title text-center">
-                            <a href="" class="text-decoration-none">Lòng mẹ</a>
-                        </h5>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-sm-3">
-                <div class="card mb-2" style="width: 100%;">
-                    <img src="images/songs/phoipha.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title text-center">
-                            <a href="" class="text-decoration-none">Phôi pha</a>
-                        </h5>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-sm-3">
-                <div class="card mb-2" style="width: 100%;">
-                    <img src="images/songs/noitinhyeubatdau.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title text-center my-title">
-                            <a href="" class="text-decoration-none">Nơi tình yêu bắt đầu</a>
-                        </h5>
-                    </div>
-                </div>
-            </div>
+        </div>
+    <?php endforeach; ?>
+        </div>       
         </div>
     </main>
     <footer class="bg-white d-flex justify-content-center align-items-center border-top border-secondary  border-2" style="height:80px">

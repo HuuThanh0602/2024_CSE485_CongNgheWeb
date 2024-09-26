@@ -1,3 +1,9 @@
+<?php
+include_once($_SERVER['DOCUMENT_ROOT'] . "/CSE485/BTTH02/services/AuthorService.php");
+$authorService = new AuthorService();
+$authors = $authorService->getAllAuthor();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,51 +16,7 @@
     <link rel="stylesheet" href="css/style_login.css">
 </head>
 <body>
-<?php
-include '../Database/db.php'; // Kết nối CSDL
-
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $ten_tgia = $_POST['ten_tgia'];
-
-    // Lấy ID lớn nhất hiện có từ bảng theloai
-    $sql_max_id = "SELECT MAX(ma_tgia) AS max_id FROM tacgia";
-    $result = $conn->query($sql_max_id);
-
-    // Kiểm tra nếu truy vấn thành công
-    if ($result && $result->num_rows > 0) {
-        $row = $result->fetch_assoc();
-        $new_id = $row['max_id'] + 1; // Tăng ID lên 1
-    } else {
-        $new_id = 1; // Nếu bảng trống, bắt đầu với ID là 1
-    }
-
-    // Thêm thể loại mới với ID đã tăng
-    $sql_add = "INSERT INTO tacgia (ma_tgia, ten_tgia) VALUES (?, ?)";
-
-    // Chuẩn bị câu truy vấn
-    if ($stmt = $conn->prepare($sql_add)) {
-        // Gán giá trị cho các tham số và thực hiện truy vấn
-        $stmt->bind_param("is", $new_id, $ten_tgia); // "is" là định dạng (int, string)
-
-        if ($stmt->execute()) {
-            // Chuyển hướng về trang category.php sau khi thêm thành công
-            header("Location: author.php?status=success");
-            exit();
-        } else {
-            echo "Lỗi khi thêm tác giả: " . $stmt->error;
-        }
-
-        // Đóng câu lệnh chuẩn bị
-        $stmt->close();
-    } else {
-        echo "Lỗi khi chuẩn bị truy vấn: " . $conn->error;
-    }
-
-    // Đóng kết nối
-    $conn->close();
-}
-?>
-    <header>
+<header>
         <nav class="navbar navbar-expand-lg bg-body-tertiary shadow p-3 bg-white rounded">
             <div class="container-fluid">
                 <div class="h3">
@@ -66,42 +28,59 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="./">Trang chủ</a>
+                        <a class="nav-link" aria-current="page" href="./index.php?controller=Admini&action=index">Trang chủ</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="../index.php">Trang ngoài</a>
+                        <a class="nav-link" href="./index.php">Trang ngoài</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link " href="category.php">Thể loại</a>
+                        <a class="nav-link" href="./index.php?controller=category&action=list">Thể loại</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active fw-bold" href="author.php">Tác giả</a>
+                        <a class="nav-link active fw-bold" href="./index.php?controller=author&action=list">Tác giả</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="article.php">Bài viết</a>
+                        <a class="nav-link" href="../../views/article/list_article.php">Bài viết</a>
                     </li>
                 </ul>
                 </div>
             </div>
         </nav>
-
     </header>
     <main class="container mt-5 mb-5">
         <!-- <h3 class="text-center text-uppercase mb-3 text-primary">CẢM NHẬN VỀ BÀI HÁT</h3> -->
         <div class="row">
             <div class="col-sm">
-                <h3 class="text-center text-uppercase fw-bold">Thêm mới Tác giả</h3>
-                <form action="add_author.php" method="post">
-                    <div class="input-group mt-3 mb-3">
-                        <span class="input-group-text" id="lblCatName">Tên Tác giả</span>
-                        <input type="text" class="form-control" name="ten_tgia" >
-                    </div>
-
-                    <div class="form-group  float-end ">
-                        <input type="submit" value="Thêm" class="btn btn-success">
-                        <a href="author.php" class="btn btn-warning ">Quay lại</a>
-                    </div>
-                </form>
+                <a href="./index.php?controller=author&action=viewsAdd" class="btn btn-success">Thêm mới</a>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Tên Tác giả</th>
+                            <th>Sửa</th>
+                            <th>Xóa</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <?php 
+                       // Hiển thị thể loại
+                       foreach ($authors as $author) {
+                        echo "<tr>";
+                        echo "<td>" . $author->getId() . "</td>";
+                        echo "<td>" . $author->getName() . "</td>";
+                        // Thêm biểu tượng sửa với link
+                        echo "<td>
+                                        <a href='./index.php?controller=author&action=viewsEdit&id=" . $author->getId() . "&name=". $author->getName() . "' class='text-blue'><i class='fa-solid fa-pen-to-square'></i></a>
+                                      </td>";
+                                // Thêm biểu tượng xóa với link
+                                echo "<td>
+                                        <a href='./index.php?controller=author&action=delete&id=" . $author->getId() . "' class='text-danger'><i class='fa-solid fa-trash'></i></a>
+                                      </td>";
+                                echo "</tr>";
+                        }
+                    ?>
+                    </tbody>
+                </table>
             </div>
         </div>
     </main>

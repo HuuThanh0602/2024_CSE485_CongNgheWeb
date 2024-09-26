@@ -10,6 +10,52 @@
     <link rel="stylesheet" href="css/style_login.css">
 </head>
 <body>
+<?php
+    // Kết nối với cơ sở dữ liệu
+    include '../database/db.php';
+
+    // Lấy ID thể loại từ URL
+    $catId = isset($_GET['id']) ? intval($_GET['id']) : 0;
+        
+
+        // Truy vấn thông tin thể loại dựa trên ID
+        $sql = "SELECT ma_tloai, ten_tloai FROM theloai WHERE ma_tloai = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("i", $catId); // 'i' nghĩa là kiểu số nguyên
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        // Kiểm tra nếu thể loại tồn tại
+        if ($result->num_rows > 0) {
+            // Lấy dữ liệu thể loại
+            $row = $result->fetch_assoc();
+            $catId = $row['ma_tloai'];
+            $catName = $row['ten_tloai'];
+        
+        }
+    
+
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $ten_tloai = $_POST['ten_tloai'];
+   
+   
+        $sql_update = "UPDATE theloai SET ten_tloai = ? WHERE ma_tloai = ?";
+    
+        if ($stmt = $conn->prepare($sql_update)) {
+            // Gán giá trị cho tham số và thực hiện câu truy vấn
+            $stmt->bind_param("si", $ten_tloai, $catId);
+            // $stmt->bind_param(":ma_tloai", $catId);
+                if ($stmt->execute()) {
+                    // Sau khi thêm thành công, chuyển hướng về category.php
+                    header("Location: category.php?status=updated");
+                    exit();
+                } else {
+                    echo "Lỗi khi sửa thể loại: " . $stmt->error;
+                }
+                $stmt->close();
+        }
+    }
+?>
     <header>
         <nav class="navbar navbar-expand-lg bg-body-tertiary shadow p-3 bg-white rounded">
             <div class="container-fluid">
@@ -40,46 +86,29 @@
                 </div>
             </div>
         </nav>
-
     </header>
+
     <main class="container mt-5 mb-5">
         <!-- <h3 class="text-center text-uppercase mb-3 text-primary">CẢM NHẬN VỀ BÀI HÁT</h3> -->
         <div class="row">
             <div class="col-sm">
-                <a href="add_category.php" class="btn btn-success">Thêm mới</a>
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Tên thể loại</th>
-                            <th>Sửa</th>
-                            <th>Xóa</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>Nhạc trữ tình</td>
-                            <td>
-                                <a href="edit_category.php?id=1"><i class="fa-solid fa-pen-to-square"></i></a>
-                            </td>
-                            <td>
-                                <a href=""><i class="fa-solid fa-trash"></i></a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td>Nhạc cách mạng</td>
-                            <td>
-                                <a href="edit_category.php?id=2"><i class="fa-solid fa-pen-to-square"></i></a>
-                            </td>
-                            <td>
-                                <a href=""><i class="fa-solid fa-trash"></i></a>
-                            </td>
-                        </tr>
-                       
-                    </tbody>
-                </table>
+                <h3 class="text-center text-uppercase fw-bold">Sửa thông tin thể loại</h3>
+                <form action="edit_category.php?id=<?php echo $catId; ?>" method="post">
+                    <div class="input-group mt-3 mb-3">
+                        <span class="input-group-text" id="lblCatId">Mã thể loại</span>
+                        <input type="text" class="form-control" name="txtCatId" readonly value= "<?php echo $catId; ?>">
+                    </div>
+
+                    <div class="input-group mt-3 mb-3">
+                        <span class="input-group-text" id="lblCatName">Tên thể loại</span>
+                        <input type="text" class="form-control" name="ten_tloai" value = "<?php echo $catName; ?>">
+                    </div>
+
+                    <div class="form-group  float-end ">
+                        <input type="submit" value="Lưu lại" class="btn btn-success">
+                        <a href="category.php" class="btn btn-warning ">Quay lại</a>
+                    </div>
+                </form>
             </div>
         </div>
     </main>
