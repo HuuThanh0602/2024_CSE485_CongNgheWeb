@@ -1,5 +1,5 @@
 <?php
-include_once($_SERVER['DOCUMENT_ROOT'] . "/CSE485/BTTH02/services/AuthorService.php");
+include_once("./services/AuthorService.php");
 $authorService = new AuthorService();
 $authors = $authorService->getAllAuthor();
 ?>
